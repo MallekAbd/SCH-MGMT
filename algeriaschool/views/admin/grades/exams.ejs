@@ -1,0 +1,6 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0">Examens</h4><a href="/admin/grades/exams/new" class="btn btn-primary rounded-pill"><i class="fas fa-plus me-2"></i>Nouveau</a></div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table table-hover mb-0"><thead class="bg-light"><tr><th class="ps-3">Nom</th><th>Type</th><th>Matière</th><th>Classe</th><th>Date</th><th></th></tr></thead><tbody>
+<% exams.forEach(e => { %><tr><td class="ps-3 fw-medium"><%= e.name %></td><td><%= e.type %></td><td><%= e.course?.name %></td><td><%= e.class?.name %></td><td><%= e.date ? new Date(e.date).toLocaleDateString('fr-FR') : '—' %></td><td class="text-end pe-3"><a href="/admin/grades/enter/<%= e._id %>" class="btn btn-sm btn-primary">Saisir notes</a></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/admin-shell-end') %>

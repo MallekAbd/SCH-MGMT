@@ -1,0 +1,15 @@
+<% portalType='teacher'; portalLinks=[{href:'/teacher/dashboard',match:'/dashboard',icon:'home',label:'Accueil'},{href:'/teacher/attendance',match:'/attendance',icon:'clipboard-check',label:'Présences'},{href:'/teacher/grades',match:'/grades',icon:'star-half-alt',label:'Notes'},{href:'/teacher/library',match:'/library',icon:'book',label:'Biblio'},{href:'/teacher/schedule',match:'/schedule',icon:'calendar',label:'Emploi du temps'},{href:'/teacher/messages',match:'/messages',icon:'envelope',label:'Messages'}]; %>
+<%- include('../../partials/portal-shell-start') %>
+<h4 class="fw-bold mb-3">Nouvelle ressource</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="/teacher/library" method="POST" enctype="multipart/form-data" class="row g-3">
+<div class="col-md-8"><label class="form-label">Titre *</label><input type="text" name="title" class="form-control" required></div>
+<div class="col-md-4"><label class="form-label">Type</label><select name="type" class="form-select"><option value="file">Fichier</option><option value="video_link">Lien vidéo</option></select></div>
+<div class="col-md-6"><label class="form-label">Fichier</label><input type="file" name="file" class="form-control"></div>
+<div class="col-md-6"><label class="form-label">URL vidéo</label><input type="url" name="videoUrl" class="form-control"></div>
+<div class="col-md-6"><label class="form-label">Matière</label><select name="course" class="form-select"><option value="">—</option><% (courses || []).forEach(c => { %><option value="<%= c._id %>"><%= c.name %></option><% }) %></select></div>
+<div class="col-md-6"><label class="form-label">Classe</label><select name="classId" class="form-select"><option value="">—</option><% (classes || []).forEach(c => { %><option value="<%= c._id %>"><%= c.name %></option><% }) %></select></div>
+<div class="col-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="3"></textarea></div>
+<div class="col-12"><a href="/teacher/library" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form></div></div>
+<%- include('../../partials/portal-shell-end') %>

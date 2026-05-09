@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const ctrl = require('../../controllers/admin/expensesController');
+const { upload } = require('../../config/multer');
+router.get('/', ctrl.index);
+router.get('/new', ctrl.create);
+router.post('/', upload('expenses').single('attachment'), ctrl.store);
+router.get('/:id/edit', ctrl.edit);
+router.put('/:id', ctrl.update);
+router.delete('/:id', ctrl.destroy);
+module.exports = router;

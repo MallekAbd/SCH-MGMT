@@ -1,0 +1,11 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= training.name %></h4>
+<div class="card border-0 shadow-sm"><div class="card-body">
+<p><%= training.description || '' %></p>
+<div class="row small mb-3"><div class="col-md-3"><strong>Durée:</strong> <%= training.duration || '—' %></div><div class="col-md-3"><strong>Frais:</strong> <%= (training.fee||0).toLocaleString() %> DA</div><div class="col-md-3"><strong>Max:</strong> <%= training.maxParticipants %></div><div class="col-md-3"><strong>Inscrits:</strong> <%= (training.enrollees||[]).length %></div></div>
+<h6 class="fw-bold mt-3">Participants</h6>
+<table class="table"><thead><tr><th>Nom</th><th>Statut</th><th>Paiement</th><th></th></tr></thead><tbody>
+<% (training.enrollees || []).forEach(e => { %><tr><td><%= e.user?.firstName %> <%= e.user?.lastName %></td><td><span class="badge bg-info-subtle text-info"><%= e.status %></span></td><td><%= e.paymentStatus %></td><td><a href="/admin/trainings/<%= training._id %>/certificate/<%= e.user?._id %>" class="btn btn-sm btn-light"><i class="fas fa-certificate"></i> Certificat</a></td></tr><% }) %>
+</tbody></table>
+</div></div>
+<%- include('../../partials/admin-shell-end') %>

@@ -1,0 +1,19 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= student ? 'Modifier' : 'Ajouter' %> un élève</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="<%= student ? `/admin/students/${student._id}?_method=PUT` : '/admin/students' %>" method="POST" enctype="multipart/form-data" class="row g-3">
+<div class="col-md-6"><label class="form-label">Prénom *</label><input type="text" name="firstName" class="form-control" value="<%= student?.firstName || '' %>" required></div>
+<div class="col-md-6"><label class="form-label">Nom *</label><input type="text" name="lastName" class="form-control" value="<%= student?.lastName || '' %>" required></div>
+<div class="col-md-6"><label class="form-label">Date de naissance</label><input type="date" name="dateOfBirth" class="form-control" value="<%= student?.dateOfBirth ? new Date(student.dateOfBirth).toISOString().slice(0,10) : '' %>"></div>
+<div class="col-md-6"><label class="form-label">Genre</label><select name="gender" class="form-select"><option value="male" <%= student?.gender==='male'?'selected':'' %>>Garçon</option><option value="female" <%= student?.gender==='female'?'selected':'' %>>Fille</option></select></div>
+<div class="col-md-6"><label class="form-label">Wilaya</label><input type="text" name="wilaya" class="form-control" value="<%= student?.wilaya || '' %>"></div>
+<div class="col-md-6"><label class="form-label">N° National</label><input type="text" name="nationalId" class="form-control" value="<%= student?.nationalId || '' %>"></div>
+<div class="col-12"><label class="form-label">Adresse</label><input type="text" name="address" class="form-control" value="<%= student?.address || '' %>"></div>
+<div class="col-md-6"><label class="form-label">Classe actuelle</label><select name="currentClass" class="form-select"><option value="">—</option><% classes.forEach(c => { %><option value="<%= c._id %>" <%= student?.currentClass?.toString() === c._id.toString() ? 'selected' : '' %>><%= c.name %></option><% }) %></select></div>
+<div class="col-md-6"><label class="form-label">Année</label><input type="text" name="academicYear" class="form-control" value="2024-2025"></div>
+<div class="col-12"><label class="form-label">Notes médicales</label><textarea name="medicalNotes" class="form-control" rows="2"><%= student?.medicalNotes || '' %></textarea></div>
+<div class="col-md-6"><label class="form-label">Photo</label><input type="file" name="photo" class="form-control" accept="image/*"></div>
+<% if (student) { %><div class="col-md-6"><label class="form-label">Statut</label><select name="status" class="form-select"><% ['active','graduated','transferred','withdrawn'].forEach(st => { %><option value="<%= st %>" <%= student.status===st?'selected':'' %>><%= st %></option><% }) %></select></div><% } %>
+<div class="col-12"><a href="/admin/students" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form></div></div>
+<%- include('../../partials/admin-shell-end') %>

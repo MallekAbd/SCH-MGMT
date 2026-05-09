@@ -1,0 +1,7 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0">Notes</h4><a href="/admin/grades/exams/new" class="btn btn-primary rounded-pill"><i class="fas fa-plus me-2"></i>Nouvel examen</a></div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table table-hover mb-0"><thead class="bg-light"><tr><th class="ps-3">Examen</th><th>Type</th><th>Matière</th><th>Classe</th><th>Date</th><th></th></tr></thead><tbody>
+<% if (!exams.length) { %><tr><td colspan="6" class="text-center text-muted py-4">Aucun examen</td></tr><% } %>
+<% exams.forEach(e => { %><tr><td class="ps-3 fw-medium"><%= e.name %></td><td><span class="badge bg-info-subtle text-info"><%= e.type %></span></td><td><%= e.course?.name %></td><td><%= e.class?.name %></td><td><%= e.date ? new Date(e.date).toLocaleDateString('fr-FR') : '—' %></td><td class="text-end pe-3"><a href="/admin/grades/enter/<%= e._id %>" class="btn btn-sm btn-primary"><i class="fas fa-pen me-1"></i>Saisir</a></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/admin-shell-end') %>

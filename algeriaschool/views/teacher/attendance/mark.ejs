@@ -1,0 +1,11 @@
+<% portalType='teacher'; portalLinks=[{href:'/teacher/dashboard',match:'/dashboard',icon:'home',label:'Accueil'},{href:'/teacher/attendance',match:'/attendance',icon:'clipboard-check',label:'Présences'},{href:'/teacher/grades',match:'/grades',icon:'star-half-alt',label:'Notes'},{href:'/teacher/library',match:'/library',icon:'book',label:'Biblio'},{href:'/teacher/schedule',match:'/schedule',icon:'calendar',label:'Emploi du temps'},{href:'/teacher/messages',match:'/messages',icon:'envelope',label:'Messages'}]; %>
+<%- include('../../partials/portal-shell-start') %>
+<h4 class="fw-bold mb-3">Présence — <%= cls.name %></h4>
+<form action="/teacher/attendance/mark/<%= cls._id %>" method="POST">
+<div class="card border-0 shadow-sm mb-3"><div class="card-body"><label class="form-label">Date</label><input type="date" name="date" class="form-control" value="<%= today %>" required style="max-width:200px"></div></div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table mb-0"><thead class="bg-light"><tr><th class="ps-3">Élève</th><th>Statut</th><th>Note</th></tr></thead><tbody>
+<% students.forEach(s => { %><tr><td class="ps-3 fw-medium"><%= s.firstName %> <%= s.lastName %></td><td><div class="d-flex gap-2"><% ['present','absent','late','excused'].forEach((st,i) => { %><div class="form-check"><input type="radio" name="records[<%= s._id %>][status]" value="<%= st %>" id="r<%= s._id %><%= st %>" class="form-check-input" <%= i===0?'checked':'' %>><label for="r<%= s._id %><%= st %>" class="form-check-label small"><%= {present:'P',absent:'A',late:'R',excused:'E'}[st] %></label></div><% }) %></div></td><td><input type="text" name="records[<%= s._id %>][note]" class="form-control form-control-sm"></td></tr><% }) %>
+</tbody></table></div></div>
+<div class="mt-3"><a href="/teacher/attendance" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form>
+<%- include('../../partials/portal-shell-end') %>

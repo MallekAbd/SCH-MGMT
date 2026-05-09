@@ -1,0 +1,19 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3">Paramètres de l'école</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="/admin/settings" method="POST" class="row g-3">
+<div class="col-md-6"><label class="form-label">Nom *</label><input type="text" name="name" class="form-control" value="<%= school.name %>" required></div>
+<div class="col-md-6"><label class="form-label">Nom (Arabe)</label><input type="text" name="nameAr" class="form-control" value="<%= school.nameAr || '' %>"></div>
+<div class="col-md-6"><label class="form-label">Email</label><input type="email" name="email" class="form-control" value="<%= school.email || '' %>"></div>
+<div class="col-md-6"><label class="form-label">Téléphone</label><input type="tel" name="phone" class="form-control" value="<%= school.phone || '' %>"></div>
+<div class="col-md-6"><label class="form-label">Site web</label><input type="url" name="website" class="form-control" value="<%= school.website || '' %>"></div>
+<div class="col-md-6"><label class="form-label">Wilaya</label><input type="text" name="wilaya" class="form-control" value="<%= school.address?.wilaya || '' %>"></div>
+<div class="col-md-6"><label class="form-label">Ville</label><input type="text" name="city" class="form-control" value="<%= school.address?.city || '' %>"></div>
+<div class="col-md-3"><label class="form-label">Échelle de notes</label><input type="number" name="gradeScale" class="form-control" value="<%= school.settings?.gradeScale || 20 %>"></div>
+<div class="col-md-3"><label class="form-label">Année scolaire</label><input type="text" name="academicYear" class="form-control" value="<%= school.settings?.academicYear || '2024-2025' %>"></div>
+<div class="col-md-6"><label class="form-label">Langue par défaut</label><select name="defaultLang" class="form-select"><option value="fr" <%= school.settings?.defaultLang==='fr'?'selected':'' %>>Français</option><option value="ar" <%= school.settings?.defaultLang==='ar'?'selected':'' %>>العربية</option><option value="en" <%= school.settings?.defaultLang==='en'?'selected':'' %>>English</option></select></div>
+<div class="col-12 form-check ms-3"><input type="checkbox" name="twoFactorEnabled" id="twoFactor" class="form-check-input" <%= school.settings?.twoFactorEnabled ? 'checked' : '' %>><label for="twoFactor">Authentification 2 facteurs</label></div>
+<div class="col-12"><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form>
+</div></div>
+<%- include('../../partials/admin-shell-end') %>

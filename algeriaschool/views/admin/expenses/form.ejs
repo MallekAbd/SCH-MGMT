@@ -1,0 +1,14 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= expense ? 'Modifier' : 'Nouvelle' %> dépense</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="<%= expense ? `/admin/expenses/${expense._id}?_method=PUT` : '/admin/expenses' %>" method="POST" enctype="multipart/form-data" class="row g-3">
+<div class="col-md-4"><label class="form-label">Catégorie</label><select name="category" class="form-select"><% ['salary','utilities','supplies','maintenance','other'].forEach(c => { %><option value="<%= c %>" <%= expense?.category===c?'selected':'' %>><%= c %></option><% }) %></select></div>
+<div class="col-md-4"><label class="form-label">Date *</label><input type="date" name="date" class="form-control" value="<%= expense?.date ? new Date(expense.date).toISOString().slice(0,10) : new Date().toISOString().slice(0,10) %>" required></div>
+<div class="col-md-4"><label class="form-label">Montant (DA) *</label><input type="number" name="amount" class="form-control" value="<%= expense?.amount || '' %>" required></div>
+<div class="col-12"><label class="form-label">Description *</label><input type="text" name="description" class="form-control" value="<%= expense?.description || '' %>" required></div>
+<div class="col-md-6"><label class="form-label">Vendeur</label><input type="text" name="vendor" class="form-control" value="<%= expense?.vendor || '' %>"></div>
+<div class="col-md-6"><label class="form-label">Pièce jointe</label><input type="file" name="attachment" class="form-control"></div>
+<div class="col-12"><label class="form-label">Notes</label><textarea name="notes" class="form-control" rows="2"><%= expense?.notes || '' %></textarea></div>
+<div class="col-12"><a href="/admin/expenses" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form></div></div>
+<%- include('../../partials/admin-shell-end') %>

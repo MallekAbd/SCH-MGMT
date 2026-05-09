@@ -1,0 +1,7 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0">Matières</h4><a href="/admin/courses/new" class="btn btn-primary rounded-pill"><i class="fas fa-plus me-2"></i>Nouvelle matière</a></div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table table-hover mb-0"><thead class="bg-light"><tr><th class="ps-3">Code</th><th>Nom</th><th>Secteur</th><th>Crédits</th><th>Heures/sem</th><th></th></tr></thead><tbody>
+<% if (!courses.length) { %><tr><td colspan="6" class="text-center text-muted py-4">Aucune matière</td></tr><% } %>
+<% courses.forEach(c => { %><tr><td class="ps-3 fw-medium"><%= c.code %></td><td><%= c.name %></td><td><%= c.sector?.name || '—' %></td><td><%= c.credits %></td><td><%= c.hoursPerWeek %></td><td class="text-end pe-3"><a href="/admin/courses/<%= c._id %>/edit" class="btn btn-sm btn-light"><i class="fas fa-edit"></i></a><form action="/admin/courses/<%= c._id %>?_method=DELETE" method="POST" class="d-inline" data-confirm="Supprimer ?"><button class="btn btn-sm btn-light text-danger"><i class="fas fa-trash"></i></button></form></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/admin-shell-end') %>

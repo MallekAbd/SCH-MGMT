@@ -1,0 +1,7 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0">Messages</h4><a href="/admin/messages/new" class="btn btn-primary"><i class="fas fa-edit me-2"></i>Nouveau</a></div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0">
+<% if (!messages.length) { %><p class="text-center text-muted py-4">Aucun message</p><% } %>
+<% messages.forEach(m => { %><a href="/admin/messages/<%= m._id %>" class="d-block text-decoration-none p-3 border-bottom <%= !m.isRead?'bg-primary-subtle':'' %>"><div class="d-flex justify-content-between"><strong class="text-dark"><%= m.sender?.firstName %> <%= m.sender?.lastName %></strong><span class="text-muted small"><%= new Date(m.createdAt).toLocaleString('fr-FR') %></span></div><div class="text-dark"><%= m.subject || '(sans objet)' %></div><div class="text-muted small"><%= m.body.substring(0,100) %></div></a><% }) %>
+</div></div>
+<%- include('../../partials/admin-shell-end') %>

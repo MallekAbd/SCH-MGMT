@@ -1,0 +1,15 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= parent ? 'Modifier' : 'Ajouter' %> un parent</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="<%= parent ? `/admin/parents/${parent._id}?_method=PUT` : '/admin/parents' %>" method="POST" class="row g-3">
+<div class="col-md-6"><label class="form-label">Prénom *</label><input type="text" name="firstName" class="form-control" value="<%= parent?.user?.firstName || '' %>" required></div>
+<div class="col-md-6"><label class="form-label">Nom *</label><input type="text" name="lastName" class="form-control" value="<%= parent?.user?.lastName || '' %>" required></div>
+<% if (!parent) { %><div class="col-md-6"><label class="form-label">Email *</label><input type="email" name="email" class="form-control" required></div><% } %>
+<div class="col-md-6"><label class="form-label">Téléphone</label><input type="tel" name="phone" class="form-control" value="<%= parent?.user?.phone || '' %>"></div>
+<div class="col-md-4"><label class="form-label">Lien</label><select name="relationship" class="form-select"><% ['father','mother','guardian'].forEach(r => { %><option value="<%= r %>" <%= parent?.relationship===r?'selected':'' %>><%= r %></option><% }) %></select></div>
+<div class="col-md-4"><label class="form-label">Profession</label><input type="text" name="profession" class="form-control" value="<%= parent?.profession || '' %>"></div>
+<div class="col-md-4"><label class="form-label">Employeur</label><input type="text" name="employer" class="form-control" value="<%= parent?.employer || '' %>"></div>
+<div class="col-12"><label class="form-label">Enfants</label><select name="students" class="form-select" multiple size="6"><% students.forEach(s => { %><option value="<%= s._id %>" <%= parent?.students?.find(p => p.toString() === s._id.toString()) ? 'selected' : '' %>><%= s.firstName %> <%= s.lastName %></option><% }) %></select></div>
+<div class="col-12"><a href="/admin/parents" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form></div></div>
+<%- include('../../partials/admin-shell-end') %>

@@ -1,0 +1,12 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0">Dépenses</h4><a href="/admin/expenses/new" class="btn btn-primary rounded-pill"><i class="fas fa-plus me-2"></i>Nouvelle</a></div>
+<div class="row g-3 mb-3">
+<% Object.entries(summaryMap).forEach(([cat,total]) => { %>
+<div class="col-md-3"><div class="card border-0 shadow-sm"><div class="card-body"><div class="text-muted small text-uppercase"><%= cat %></div><div class="fw-bold"><%= total.toLocaleString() %> DA</div></div></div></div>
+<% }) %>
+</div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table table-hover mb-0"><thead class="bg-light"><tr><th class="ps-3">Date</th><th>Catégorie</th><th>Description</th><th>Vendeur</th><th>Montant</th><th></th></tr></thead><tbody>
+<% if (!expenses.length) { %><tr><td colspan="6" class="text-center text-muted py-4">Aucune dépense</td></tr><% } %>
+<% expenses.forEach(e => { %><tr><td class="ps-3 small"><%= new Date(e.date).toLocaleDateString('fr-FR') %></td><td><span class="badge bg-secondary-subtle text-secondary"><%= e.category %></span></td><td><%= e.description %></td><td><%= e.vendor || '—' %></td><td class="fw-bold"><%= e.amount.toLocaleString() %> DA</td><td class="text-end pe-3"><a href="/admin/expenses/<%= e._id %>/edit" class="btn btn-sm btn-light"><i class="fas fa-edit"></i></a><form action="/admin/expenses/<%= e._id %>?_method=DELETE" method="POST" class="d-inline" data-confirm="Supprimer ?"><button class="btn btn-sm btn-light text-danger"><i class="fas fa-trash"></i></button></form></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/admin-shell-end') %>

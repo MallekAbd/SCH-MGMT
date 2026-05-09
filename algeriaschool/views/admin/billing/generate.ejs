@@ -1,0 +1,13 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3">Générer des factures</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="/admin/billing/invoices/generate" method="POST" class="row g-3">
+<div class="col-md-6"><label class="form-label">Structure tarifaire *</label><select name="feeStructureId" class="form-select" required><% feeStructures.forEach(f => { %><option value="<%= f._id %>"><%= f.name %> — <%= f.amount.toLocaleString() %> DA</option><% }) %></select></div>
+<div class="col-md-6"><label class="form-label">Classe (optionnel)</label><select name="classId" class="form-select"><option value="">Tous les élèves actifs</option><% classes.forEach(c => { %><option value="<%= c._id %>"><%= c.name %></option><% }) %></select></div>
+<div class="col-md-4"><label class="form-label">Période</label><input type="text" name="period" class="form-control" placeholder="Ex: Janvier 2025"></div>
+<div class="col-md-4"><label class="form-label">Année</label><input type="text" name="academicYear" class="form-control" value="2024-2025"></div>
+<div class="col-md-4"><label class="form-label">Échéance</label><input type="date" name="dueDate" class="form-control"></div>
+<div class="col-12"><a href="/admin/billing" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Générer</button></div>
+</form>
+</div></div>
+<%- include('../../partials/admin-shell-end') %>

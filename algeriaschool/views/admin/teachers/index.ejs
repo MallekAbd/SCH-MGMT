@@ -1,0 +1,7 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0">Enseignants</h4><a href="/admin/teachers/new" class="btn btn-primary rounded-pill"><i class="fas fa-plus me-2"></i>Ajouter</a></div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table table-hover mb-0"><thead class="bg-light"><tr><th class="ps-3">Nom</th><th>Email</th><th>Spécialisation</th><th>Type</th><th>Statut</th><th></th></tr></thead><tbody>
+<% if (!teachers.length) { %><tr><td colspan="6" class="text-center text-muted py-4">Aucun enseignant</td></tr><% } %>
+<% teachers.forEach(t => { %><tr><td class="ps-3 fw-medium"><%= t.user?.firstName %> <%= t.user?.lastName %></td><td><%= t.user?.email %></td><td><%= t.specialization || '—' %></td><td><%= t.contractType %></td><td><span class="badge bg-<%= t.isActive?'success':'secondary' %>-subtle text-<%= t.isActive?'success':'secondary' %>"><%= t.isActive ? 'Actif' : 'Inactif' %></span></td><td class="text-end pe-3"><a href="/admin/teachers/<%= t._id %>/edit" class="btn btn-sm btn-light"><i class="fas fa-edit"></i></a><form action="/admin/teachers/<%= t._id %>?_method=DELETE" method="POST" class="d-inline" data-confirm="Supprimer ?"><button class="btn btn-sm btn-light text-danger"><i class="fas fa-trash"></i></button></form></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/admin-shell-end') %>

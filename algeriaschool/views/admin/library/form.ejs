@@ -1,0 +1,18 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3">Nouveau document</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="/admin/library" method="POST" enctype="multipart/form-data" class="row g-3">
+<div class="col-md-8"><label class="form-label">Titre *</label><input type="text" name="title" class="form-control" required></div>
+<div class="col-md-4"><label class="form-label">Type *</label><select name="type" class="form-select"><option value="file">Fichier</option><option value="video_link">Lien vidéo</option><option value="book">Livre</option></select></div>
+<div class="col-md-6"><label class="form-label">Fichier (PDF, image…)</label><input type="file" name="file" class="form-control"></div>
+<div class="col-md-6"><label class="form-label">URL vidéo</label><input type="url" name="videoUrl" class="form-control"></div>
+<div class="col-md-4"><label class="form-label">Auteur (livre)</label><input type="text" name="author" class="form-control"></div>
+<div class="col-md-4"><label class="form-label">ISBN</label><input type="text" name="isbn" class="form-control"></div>
+<div class="col-md-4"><label class="form-label">Copies</label><input type="number" name="copies" class="form-control" value="1"></div>
+<div class="col-md-6"><label class="form-label">Matière</label><select name="course" class="form-select"><option value="">—</option><% courses.forEach(c => { %><option value="<%= c._id %>"><%= c.name %></option><% }) %></select></div>
+<div class="col-md-6"><label class="form-label">Classe</label><select name="classId" class="form-select"><option value="">—</option><% classes.forEach(c => { %><option value="<%= c._id %>"><%= c.name %></option><% }) %></select></div>
+<div class="col-12"><label class="form-label">Tags (virgule)</label><input type="text" name="tags" class="form-control"></div>
+<div class="col-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="3"></textarea></div>
+<div class="col-12"><a href="/admin/library" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form></div></div>
+<%- include('../../partials/admin-shell-end') %>

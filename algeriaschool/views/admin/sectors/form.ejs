@@ -1,0 +1,15 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= sector ? 'Modifier' : 'Nouveau' %> secteur</h4>
+<div class="card border-0 shadow-sm">
+  <div class="card-body p-4">
+    <form action="<%= sector ? `/admin/sectors/${sector._id}?_method=PUT` : '/admin/sectors' %>" method="POST" class="row g-3" style="max-width:700px">
+      <div class="col-md-6"><label class="form-label">Nom *</label><input type="text" name="name" class="form-control" value="<%= sector?.name || '' %>" required></div>
+      <div class="col-md-6"><label class="form-label">Nom (Arabe)</label><input type="text" name="nameAr" class="form-control" value="<%= sector?.nameAr || '' %>"></div>
+      <div class="col-md-6"><label class="form-label">Code</label><input type="text" name="code" class="form-control" value="<%= sector?.code || '' %>"></div>
+      <div class="col-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="3"><%= sector?.description || '' %></textarea></div>
+      <% if (sector) { %><div class="col-12 form-check ms-3"><input type="checkbox" name="isActive" id="isActive" class="form-check-input" <%= sector.isActive ? 'checked' : '' %>><label for="isActive" class="form-check-label">Actif</label></div><% } %>
+      <div class="col-12"><a href="/admin/sectors" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+    </form>
+  </div>
+</div>
+<%- include('../../partials/admin-shell-end') %>

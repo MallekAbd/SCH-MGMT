@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="<%= locals.lang || 'fr' %>" dir="<%= locals.isRTL ? 'rtl' : 'ltr' %>">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> | AlgeriaSchool</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <% if (locals.isRTL) { %><link rel="stylesheet" href="/css/rtl.css"><% } %>
+  <link rel="stylesheet" href="/css/public.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/"><span class="text-gradient">Algeria</span><span>School</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="#features">Fonctionnalités</a></li>
+          <li class="nav-item"><a class="nav-link" href="#school-types">Types d'écoles</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Tarifs</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <div class="dropdown">
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-globe me-1"></i><%= (locals.lang || 'fr').toUpperCase() %></button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="?lang=fr">Français</a></li>
+              <li><a class="dropdown-item" href="?lang=ar">العربية</a></li>
+              <li><a class="dropdown-item" href="?lang=en">English</a></li>
+            </ul>
+          </div>
+          <% if (locals.user) { %><a href="/admin/dashboard" class="btn btn-sm btn-outline-primary">Tableau de bord</a><% } else { %>
+          <a href="/auth/login" class="btn btn-sm btn-outline-primary">Connexion</a>
+          <a href="/auth/register" class="btn btn-sm btn-primary px-3">Essai gratuit</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <% if (locals.flashSuccess && flashSuccess.length) { %>
+  <div class="alert alert-success alert-dismissible fade show m-0 rounded-0 mt-5" role="alert" style="margin-top:60px!important"><%= flashSuccess[0] %><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+  <% } %>
+
+  <section class="position-relative overflow-hidden" style="padding-top:120px;padding-bottom:60px;background:linear-gradient(135deg,#f0f4ff 0%,#faf5ff 50%,#f0fdf4 100%)">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="badge rounded-pill px-3 py-2 mb-3" style="background:#e0e7ff;color:#4f46e5">🎓 La plateforme N°1 en Algérie</span>
+          <h1 class="display-4 fw-bold mb-4" style="line-height:1.15">Gérez votre <span class="text-gradient">école</span> intelligemment</h1>
+          <p class="lead text-muted mb-4">AlgeriaSchool est la plateforme SaaS tout-en-un pour les écoles privées algériennes. Élèves, notes, présences, facturation — tout centralisé.</p>
+          <div class="d-flex flex-wrap gap-3 mb-5">
+            <a href="/auth/register" class="btn btn-primary btn-lg px-5 rounded-pill shadow">Essai gratuit 30 jours <i class="fas fa-arrow-right ms-2"></i></a>
+            <a href="#features" class="btn btn-outline-secondary btn-lg px-4 rounded-pill">Voir les fonctionnalités</a>
+          </div>
+          <div class="d-flex gap-4">
+            <div class="text-center"><div class="fs-3 fw-bold" style="color:#4f46e5">500+</div><div class="text-muted small">Écoles</div></div>
+            <div class="text-center"><div class="fs-3 fw-bold text-success">50K+</div><div class="text-muted small">Élèves</div></div>
+            <div class="text-center"><div class="fs-3 fw-bold text-warning">98%</div><div class="text-muted small">Satisfaction</div></div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="rounded-3 shadow-lg overflow-hidden border bg-white">
+            <div class="d-flex gap-1 px-3 py-2 bg-dark"><span class="rounded-circle bg-danger" style="width:10px;height:10px"></span><span class="rounded-circle bg-warning" style="width:10px;height:10px"></span><span class="rounded-circle bg-success" style="width:10px;height:10px"></span></div>
+            <div class="p-3">
+              <div class="row g-2 mb-3">
+                <div class="col-6"><div class="rounded-2 p-2 text-center" style="background:#eff6ff"><div class="fw-bold" style="color:#3b82f6">248</div><div class="text-muted small">Élèves actifs</div></div></div>
+                <div class="col-6"><div class="rounded-2 p-2 text-center" style="background:#f0fdf4"><div class="fw-bold text-success">18</div><div class="text-muted small">Enseignants</div></div></div>
+                <div class="col-6"><div class="rounded-2 p-2 text-center" style="background:#fffbeb"><div class="fw-bold text-warning">12</div><div class="text-muted small">Classes</div></div></div>
+                <div class="col-6"><div class="rounded-2 p-2 text-center" style="background:#f0f9ff"><div class="fw-bold" style="color:#06b6d4">94%</div><div class="text-muted small">Présence moy.</div></div></div>
+              </div>
+              <div class="bg-light rounded p-2 mb-2 d-flex align-items-center gap-2"><span class="rounded-circle bg-success" style="width:8px;height:8px"></span><small>Ahmed Benali — Moyenne: 16.5/20</small></div>
+              <div class="bg-light rounded p-2 mb-2 d-flex align-items-center gap-2"><span class="rounded-circle bg-warning" style="width:8px;height:8px"></span><small>Facture INV-001 — 8,000 DA</small></div>
+              <div class="bg-light rounded p-2 d-flex align-items-center gap-2"><span class="rounded-circle" style="width:8px;height:8px;background:#4f46e5"></span><small>Examen Mathématiques — Demain</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="py-6" style="background:#f8fafc">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold fs-1">Fonctionnalités <span class="text-gradient">AlgeriaSchool</span></h2>
+        <p class="text-muted lead">Tout ce dont vous avez besoin pour gérer votre école</p>
+      </div>
+      <div class="row g-4">
+        <% const feats = [
+          {icon:'tachometer-alt',color:'4f46e5',bg:'eff6ff',title:'Tableau de bord',desc:'Vue d\'ensemble KPIs, graphiques et activités récentes.'},
+          {icon:'sitemap',color:'059669',bg:'f0fdf4',title:'Secteurs',desc:'Organisez vos filières académiques.'},
+          {icon:'book-open',color:'0891b2',bg:'f0f9ff',title:'Matières',desc:'Catalogue centralisé avec syllabus et crédits.'},
+          {icon:'chalkboard',color:'d97706',bg:'fffbeb',title:'Classes',desc:'Emplois du temps et affectations.'},
+          {icon:'user-graduate',color:'dc2626',bg:'fef2f2',title:'Élèves',desc:'Inscription, suivi, carte d\'identité PDF.'},
+          {icon:'chalkboard-teacher',color:'7c3aed',bg:'f5f3ff',title:'Enseignants',desc:'Profils, qualifications, charge horaire.'},
+          {icon:'users',color:'059669',bg:'f0fdf4',title:'Parents',desc:'Portail dédié aux parents.'},
+          {icon:'clipboard-check',color:'0891b2',bg:'f0f9ff',title:'Présences',desc:'Pointage avec alertes parents.'},
+          {icon:'star-half-alt',color:'d97706',bg:'fffbeb',title:'Notes & Bulletins',desc:'Saisie, calcul auto et bulletins PDF.'},
+          {icon:'book',color:'dc2626',bg:'fef2f2',title:'Bibliothèque',desc:'Ressources pédagogiques.'},
+          {icon:'file-invoice-dollar',color:'4f46e5',bg:'eff6ff',title:'Facturation',desc:'Factures, CCP, BaridiBank.'},
+          {icon:'receipt',color:'059669',bg:'f0fdf4',title:'Dépenses',desc:'Suivi budgétaire par catégorie.'},
+          {icon:'shield-alt',color:'7c3aed',bg:'f5f3ff',title:'Accès',desc:'Permissions granulaires + audit.'},
+          {icon:'certificate',color:'d97706',bg:'fffbeb',title:'Formations',desc:'Programmes et certificats.'}
+        ]; %>
+        <% feats.forEach(f => { %>
+        <div class="col-md-6 col-lg-3">
+          <div class="feature-card">
+            <div class="feature-icon" style="background:#<%= f.bg %>;color:#<%= f.color %>"><i class="fas fa-<%= f.icon %>"></i></div>
+            <h6 class="fw-bold mb-2"><%= f.title %></h6>
+            <p class="text-muted small mb-0"><%= f.desc %></p>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-6">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <span class="badge rounded-pill px-3 py-2 mb-3" style="background:#e0e7ff;color:#4f46e5">Portails personnalisés</span>
+          <h2 class="fw-bold fs-1 mb-4">Un portail dédié pour <span class="text-gradient">chaque rôle</span></h2>
+          <div class="d-flex flex-column gap-4">
+            <div class="d-flex gap-3"><div class="rounded-3 p-2" style="background:#eff6ff"><i class="fas fa-user-graduate" style="color:#4f46e5"></i></div><div><h6 class="fw-semibold mb-1">Portail Étudiant</h6><p class="text-muted small mb-0">Emploi du temps, notes, présences, bibliothèque, factures, messagerie.</p></div></div>
+            <div class="d-flex gap-3"><div class="rounded-3 p-2" style="background:#f0fdf4"><i class="fas fa-chalkboard-teacher text-success"></i></div><div><h6 class="fw-semibold mb-1">Portail Enseignant</h6><p class="text-muted small mb-0">Classes, pointage, saisie notes, ressources, messagerie.</p></div></div>
+            <div class="d-flex gap-3"><div class="rounded-3 p-2" style="background:#fffbeb"><i class="fas fa-users text-warning"></i></div><div><h6 class="fw-semibold mb-1">Portail Parent</h6><p class="text-muted small mb-0">Suivi enfant, alertes absences, paiements, communication.</p></div></div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card border-0 shadow p-4" style="border-radius:20px">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width:44px;height:44px">A</div>
+              <div><div class="fw-semibold">Ahmed Benali</div><div class="text-muted small">Étudiant · 3ème Scientifique</div></div>
+            </div>
+            <div class="row g-3 text-center mb-4">
+              <div class="col-4"><div class="rounded-2 p-2" style="background:#eff6ff"><div class="fw-bold" style="color:#3b82f6">16.2</div><div class="text-muted small">Moyenne</div></div></div>
+              <div class="col-4"><div class="rounded-2 p-2" style="background:#f0fdf4"><div class="fw-bold text-success">96%</div><div class="text-muted small">Présence</div></div></div>
+              <div class="col-4"><div class="rounded-2 p-2" style="background:#fffbeb"><div class="fw-bold text-warning">3ème</div><div class="text-muted small">Rang</div></div></div>
+            </div>
+            <div class="bg-light rounded p-3 small text-muted">📢 Examen de Physique le 15/12 — Préparation en cours</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="school-types" class="py-6" style="background:#f8fafc">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-2">Compatible avec tous les types d'écoles</h2>
+      <p class="text-muted mb-5">Une solution adaptée à chaque niveau scolaire</p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <% ['Préscolaire','École Primaire','EMC / Collège','Lycée','Université','Centre de Formation','École Privée'].forEach(t => { %>
+        <div class="school-type-badge"><i class="fas fa-graduation-cap me-2" style="color:#4f46e5"></i><%= t %></div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="py-6">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold fs-1">Tarifs <span class="text-gradient">AlgeriaSchool</span></h2>
+        <p class="text-muted lead mb-4">Des prix transparents</p>
+        <div class="d-inline-flex rounded-pill p-1 gap-1" style="background:#f1f5f9">
+          <% ['monthly','quarterly','semestrial','biannual','yearly'].forEach((p,i) => { %>
+          <button class="period-btn <%= i===0?'active':'' %>" data-period="<%= p %>"><%= {monthly:'Mensuel',quarterly:'Trimestriel',semestrial:'Semestriel',biannual:'6 Mois',yearly:'Annuel'}[p] %></button>
+          <% }) %>
+        </div>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <% const discounts = {monthly:1,quarterly:0.95,semestrial:0.9,biannual:0.85,yearly:0.75}; %>
+        <% const mults = {monthly:1,quarterly:3,semestrial:6,biannual:6,yearly:12}; %>
+        <% (plans || []).forEach((plan,idx) => { %>
+        <div class="col-lg-4">
+          <div class="card border-0 shadow h-100 position-relative" style="border-radius:20px;<%= idx===1?'border:2px solid #4f46e5!important':'' %>">
+            <% if (idx===1) { %><div class="position-absolute top-0 start-50 translate-middle badge bg-primary px-3 py-2 rounded-pill">⭐ Plus Populaire</div><% } %>
+            <div class="card-body p-4 d-flex flex-column">
+              <h4 class="fw-bold mb-1"><%= plan.name %></h4>
+              <div class="my-3">
+                <% ['monthly','quarterly','semestrial','biannual','yearly'].forEach(p => { %>
+                <div class="price-display" data-period="<%= p %>" style="display:<%= p==='monthly'?'block':'none' %>">
+                  <span class="display-5 fw-bold"><%= Math.round(plan.prices.monthly * discounts[p] * mults[p]).toLocaleString() %></span>
+                  <span class="text-muted fs-6">DA / <%= {monthly:'mois',quarterly:'trim.',semestrial:'sem.',biannual:'6 mois',yearly:'an'}[p] %></span>
+                </div>
+                <% }) %>
+              </div>
+              <p class="text-muted small">Jusqu'à <strong><%= plan.studentLimit.toLocaleString() %></strong> élèves</p>
+              <hr>
+              <ul class="list-unstyled flex-grow-1">
+                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Tous les 14 modules</li>
+                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Support par email</li>
+                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Mises à jour gratuites</li>
+                <% if (idx >= 1) { %><li class="mb-2"><i class="fas fa-check text-success me-2"></i>Support prioritaire</li><% } %>
+                <% if (idx >= 2) { %><li class="mb-2"><i class="fas fa-check text-success me-2"></i>Formation incluse</li><% } %>
+              </ul>
+              <a href="/auth/register?plan=<%= plan._id %>" class="btn <%= idx===1?'btn-primary':'btn-outline-primary' %> w-100 rounded-pill mt-3">Commencer</a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5" style="background:#f8fafc">
+    <div class="container text-center">
+      <h5 class="text-muted mb-4">Méthodes de paiement acceptées</h5>
+      <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap">
+        <div class="card border shadow-sm px-4 py-3 rounded-3"><i class="fas fa-university me-2 text-primary"></i><strong>CCP</strong></div>
+        <div class="card border shadow-sm px-4 py-3 rounded-3"><i class="fas fa-mobile-alt me-2 text-success"></i><strong>BaridiBank</strong></div>
+        <div class="card border shadow-sm px-4 py-3 rounded-3"><i class="fas fa-exchange-alt me-2 text-info"></i><strong>Virement</strong></div>
+        <div class="card border shadow-sm px-4 py-3 rounded-3"><i class="fas fa-money-bill-wave me-2 text-warning"></i><strong>Espèces</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5" style="background:linear-gradient(135deg,#4f46e5,#06b6d4)">
+    <div class="container text-center text-white">
+      <h3 class="fw-bold mb-2">Restez informé</h3>
+      <p class="mb-4 opacity-75">Recevez les dernières actualités et conseils.</p>
+      <form action="/newsletter" method="POST" class="d-flex justify-content-center gap-2 flex-wrap">
+        <input type="email" name="email" class="form-control" placeholder="votre@email.com" style="max-width:320px" required>
+        <button type="submit" class="btn btn-light text-primary fw-semibold px-4">S'inscrire</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact" class="py-6">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-5">
+          <h2 class="fw-bold fs-1 mb-4">Contactez-<span class="text-gradient">nous</span></h2>
+          <div class="d-flex flex-column gap-4">
+            <div class="d-flex gap-3"><div class="rounded-3 p-2" style="background:#eff6ff"><i class="fas fa-info-circle" style="color:#4f46e5"></i></div><div><h6 class="fw-semibold">Information & Consultation</h6><p class="text-muted small mb-0">Nous vous accompagnons dans la mise en place.</p></div></div>
+            <div class="d-flex gap-3"><div class="rounded-3 p-2" style="background:#f0fdf4"><i class="fas fa-headset text-success"></i></div><div><h6 class="fw-semibold">Support & Assistance</h6><p class="text-muted small mb-0">Disponible 6j/7 de 8h à 18h.</p></div></div>
+            <div class="d-flex gap-3"><div class="rounded-3 p-2" style="background:#fffbeb"><i class="fas fa-comment-dots text-warning"></i></div><div><h6 class="fw-semibold">Suggestions & Feedback</h6><p class="text-muted small mb-0">Vos retours améliorent la plateforme.</p></div></div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="card border-0 shadow-sm p-4" style="border-radius:16px">
+            <form action="/contact" method="POST">
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label fw-medium small">Nom complet</label><input type="text" name="name" class="form-control" required></div>
+                <div class="col-md-6"><label class="form-label fw-medium small">Email</label><input type="email" name="email" class="form-control" required></div>
+                <div class="col-12"><label class="form-label fw-medium small">Sujet</label><input type="text" name="subject" class="form-control" required></div>
+                <div class="col-12"><label class="form-label fw-medium small">Message</label><textarea name="message" class="form-control" rows="4" required></textarea></div>
+                <div class="col-12"><button type="submit" class="btn btn-primary rounded-pill px-5">Envoyer <i class="fas fa-paper-plane ms-2"></i></button></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark text-white py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <h5 class="fw-bold mb-3"><span class="text-success">Algeria</span>School</h5>
+          <p class="text-muted small">La plateforme de gestion scolaire pour les écoles privées algériennes.</p>
+          <div class="d-flex gap-3 mt-3">
+            <a href="#" class="text-muted"><i class="fab fa-facebook fa-lg"></i></a>
+            <a href="#" class="text-muted"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="#" class="text-muted"><i class="fab fa-linkedin fa-lg"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-6"><h6 class="fw-semibold mb-3">Produit</h6><ul class="list-unstyled small text-muted"><li class="mb-2"><a href="#features" class="text-muted text-decoration-none">Fonctionnalités</a></li><li class="mb-2"><a href="#pricing" class="text-muted text-decoration-none">Tarifs</a></li><li class="mb-2"><a href="/auth/register" class="text-muted text-decoration-none">Essai gratuit</a></li></ul></div>
+        <div class="col-lg-2 col-6"><h6 class="fw-semibold mb-3">Support</h6><ul class="list-unstyled small text-muted"><li class="mb-2"><a href="#contact" class="text-muted text-decoration-none">Contact</a></li><li class="mb-2"><a href="#" class="text-muted text-decoration-none">Documentation</a></li></ul></div>
+        <div class="col-lg-2 col-6"><h6 class="fw-semibold mb-3">Légal</h6><ul class="list-unstyled small text-muted"><li class="mb-2"><a href="#" class="text-muted text-decoration-none">Conditions</a></li><li class="mb-2"><a href="#" class="text-muted text-decoration-none">Confidentialité</a></li></ul></div>
+        <div class="col-lg-2 col-6"><h6 class="fw-semibold mb-3">Contact</h6><ul class="list-unstyled small text-muted"><li class="mb-2"><i class="fas fa-envelope me-2"></i>contact@algeriaschool.com</li><li class="mb-2"><i class="fas fa-phone me-2"></i>+213 XX XX XX XX</li></ul></div>
+      </div>
+      <hr class="border-secondary mt-4">
+      <div class="d-flex justify-content-between flex-wrap"><p class="text-muted small mb-0">&copy; 2025 AlgeriaSchool</p><p class="text-muted small mb-0">Conçu pour les écoles algériennes 🇩🇿</p></div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/public.js"></script>
+</body>
+</html>

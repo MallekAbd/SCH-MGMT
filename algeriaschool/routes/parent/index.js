@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const { authenticate, authorize } = require('../../middleware/auth');
+const { tenantMiddleware } = require('../../middleware/tenant');
+router.use(authenticate, authorize('parent'), tenantMiddleware);
+router.use('/dashboard', require('./dashboard.routes'));
+router.use('/grades', require('./grades.routes'));
+router.use('/attendance', require('./attendance.routes'));
+router.use('/invoices', require('./invoices.routes'));
+router.use('/messages', require('./messages.routes'));
+module.exports = router;

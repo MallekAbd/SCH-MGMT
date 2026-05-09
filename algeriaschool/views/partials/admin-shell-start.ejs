@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="<%= locals.lang || 'fr' %>" dir="<%= locals.isRTL ? 'rtl' : 'ltr' %>">
+<head><%- include('./admin-head') %></head>
+<body class="admin-body">
+<%- include('./admin-sidebar') %>
+<div class="admin-main">
+<%- include('./admin-topbar') %>
+<div class="admin-content">
+<% if (locals.flashSuccess && flashSuccess.length) { %>
+<div class="alert alert-success alert-dismissible fade show"><%= flashSuccess[0] %><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+<% } %>
+<% if (locals.flashError && flashError.length) { %>
+<div class="alert alert-danger alert-dismissible fade show"><%= flashError[0] %><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+<% } %>

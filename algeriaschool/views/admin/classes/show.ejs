@@ -1,0 +1,8 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0"><%= cls.name %></h4><a href="/admin/classes/<%= cls._id %>/edit" class="btn btn-light"><i class="fas fa-edit me-2"></i>Modifier</a></div>
+<div class="row g-3">
+<div class="col-md-4"><div class="card border-0 shadow-sm"><div class="card-body"><h6 class="text-muted small">INFOS</h6><div class="small"><strong>Niveau:</strong> <%= cls.level || '—' %></div><div class="small"><strong>Année:</strong> <%= cls.academicYear %></div><div class="small"><strong>Capacité:</strong> <%= cls.capacity %></div><div class="small"><strong>Salle:</strong> <%= cls.room || '—' %></div><div class="small"><strong>Prof principal:</strong> <%= cls.homeTeacher?.user ? cls.homeTeacher.user.firstName + ' ' + cls.homeTeacher.user.lastName : '—' %></div></div></div></div>
+<div class="col-md-4"><div class="card border-0 shadow-sm"><div class="card-body"><h6 class="text-muted small">ÉLÈVES (<%= students.length %>)</h6><% students.slice(0,8).forEach(s => { %><div class="small"><%= s.firstName %> <%= s.lastName %></div><% }) %></div></div></div>
+<div class="col-md-4"><div class="card border-0 shadow-sm"><div class="card-body"><h6 class="text-muted small">MATIÈRES</h6><% (cls.courses || []).forEach(c => { %><div class="small"><%= c.name %></div><% }) %></div></div></div>
+</div>
+<%- include('../../partials/admin-shell-end') %>

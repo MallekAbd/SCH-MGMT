@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const ctrl = require('../../controllers/admin/libraryController');
+const { upload } = require('../../config/multer');
+router.get('/', ctrl.index);
+router.get('/new', ctrl.create);
+router.post('/', upload('library').single('file'), ctrl.store);
+router.get('/:id', ctrl.show);
+router.delete('/:id', ctrl.destroy);
+module.exports = router;

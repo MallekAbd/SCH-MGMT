@@ -1,0 +1,22 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3">Demande — <%= application.firstName %> <%= application.lastName %></h4>
+<div class="row g-3">
+<div class="col-md-8"><div class="card border-0 shadow-sm"><div class="card-body p-4">
+<h6 class="fw-bold mb-3">Informations enfant</h6>
+<div class="row small g-2 mb-3"><div class="col-md-6"><strong>Nom:</strong> <%= application.firstName %> <%= application.lastName %></div><div class="col-md-6"><strong>Date naiss.:</strong> <%= application.dateOfBirth ? new Date(application.dateOfBirth).toLocaleDateString('fr-FR') : '—' %></div><div class="col-md-6"><strong>Genre:</strong> <%= application.gender || '—' %></div><div class="col-md-6"><strong>Wilaya:</strong> <%= application.wilaya || '—' %></div><div class="col-md-6"><strong>Classe demandée:</strong> <%= application.applyingForClass || '—' %></div><div class="col-md-6"><strong>École précédente:</strong> <%= application.previousSchool || '—' %></div></div>
+<h6 class="fw-bold mb-3">Parent</h6>
+<div class="row small g-2"><div class="col-md-6"><strong>Nom:</strong> <%= application.parentName %></div><div class="col-md-6"><strong>Téléphone:</strong> <%= application.parentPhone %></div><div class="col-md-6"><strong>Email:</strong> <%= application.parentEmail || '—' %></div><div class="col-md-6"><strong>Lien:</strong> <%= application.parentRelationship || '—' %></div></div>
+</div></div></div>
+<div class="col-md-4"><div class="card border-0 shadow-sm"><div class="card-body">
+<h6 class="fw-bold mb-3">Actions</h6>
+<div class="mb-2"><span class="badge bg-<%= {pending:'warning',reviewing:'info',approved:'success',rejected:'danger',enrolled:'primary'}[application.status] %> text-white"><%= application.status %></span></div>
+<% if (application.status === 'pending' || application.status === 'reviewing') { %>
+<form action="/admin/admissions/<%= application._id %>/approve" method="POST" class="mb-2"><button class="btn btn-success w-100"><i class="fas fa-check me-2"></i>Approuver</button></form>
+<form action="/admin/admissions/<%= application._id %>/reject" method="POST"><button class="btn btn-outline-danger w-100"><i class="fas fa-times me-2"></i>Rejeter</button></form>
+<% } %>
+<% if (application.status === 'approved') { %>
+<form action="/admin/admissions/<%= application._id %>/enroll" method="POST"><button class="btn btn-primary w-100"><i class="fas fa-user-graduate me-2"></i>Inscrire comme élève</button></form>
+<% } %>
+</div></div></div>
+</div>
+<%- include('../../partials/admin-shell-end') %>

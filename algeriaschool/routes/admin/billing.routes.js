@@ -1,0 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const ctrl = require('../../controllers/admin/billingController');
+router.get('/', ctrl.index);
+router.get('/fee-structures', ctrl.feeStructures);
+router.post('/fee-structures', ctrl.storeFeeStructure);
+router.get('/invoices/generate', ctrl.generateForm);
+router.post('/invoices/generate', ctrl.generateInvoices);
+router.get('/invoices/:id', ctrl.showInvoice);
+router.get('/invoices/:id/pdf', ctrl.invoicePdf);
+router.post('/payments', ctrl.recordPayment);
+module.exports = router;

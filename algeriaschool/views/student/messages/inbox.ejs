@@ -1,0 +1,8 @@
+<% portalType='student'; portalLinks=[{href:'/student/dashboard',match:'/dashboard',icon:'home',label:'Accueil'},{href:'/student/grades',match:'/grades',icon:'star-half-alt',label:'Notes'},{href:'/student/attendance',match:'/attendance',icon:'clipboard-check',label:'Présences'},{href:'/student/schedule',match:'/schedule',icon:'calendar',label:'Emploi'},{href:'/student/library',match:'/library',icon:'book',label:'Biblio'},{href:'/student/invoices',match:'/invoices',icon:'file-invoice',label:'Factures'},{href:'/student/messages',match:'/messages',icon:'envelope',label:'Messages'}]; %>
+<%- include('../../partials/portal-shell-start') %>
+<h4 class="fw-bold mb-3">Messages</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-0">
+<% if (!messages || !messages.length) { %><p class="text-center text-muted py-4">Aucun message</p><% } %>
+<% (messages || []).forEach(m => { %><a href="/student/messages/<%= m._id %>" class="d-block text-decoration-none p-3 border-bottom <%= !m.isRead?'bg-primary-subtle':'' %>"><div class="d-flex justify-content-between"><strong class="text-dark"><%= m.sender?.firstName %> <%= m.sender?.lastName %></strong><span class="text-muted small"><%= new Date(m.createdAt).toLocaleDateString('fr-FR') %></span></div><div class="text-dark"><%= m.subject || '(sans objet)' %></div></a><% }) %>
+</div></div>
+<%- include('../../partials/portal-shell-end') %>

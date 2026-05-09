@@ -1,0 +1,8 @@
+<% portalType='parent'; portalLinks=[{href:'/parent/dashboard',match:'/dashboard',icon:'home',label:'Accueil'},{href:'/parent/grades',match:'/grades',icon:'star-half-alt',label:'Notes'},{href:'/parent/attendance',match:'/attendance',icon:'clipboard-check',label:'Présences'},{href:'/parent/invoices',match:'/invoices',icon:'file-invoice',label:'Factures'},{href:'/parent/messages',match:'/messages',icon:'envelope',label:'Messages'}]; %>
+<%- include('../../partials/portal-shell-start') %>
+<h4 class="fw-bold mb-3">Factures</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table mb-0"><thead class="bg-light"><tr><th class="ps-3">N°</th><th>Élève</th><th>Total</th><th>Solde</th><th>Statut</th><th>Échéance</th></tr></thead><tbody>
+<% if (!invoices || !invoices.length) { %><tr><td colspan="6" class="text-center text-muted py-4">Aucune facture</td></tr><% } %>
+<% (invoices || []).forEach(i => { %><tr><td class="ps-3 small"><%= i.invoiceNumber %></td><td><%= i.student?.firstName %> <%= i.student?.lastName %></td><td><%= (i.total||0).toLocaleString() %> DA</td><td class="<%= i.balance>0?'text-danger':'text-success' %>"><%= (i.balance||0).toLocaleString() %> DA</td><td><span class="badge bg-<%= {paid:'success',pending:'warning',partial:'info',overdue:'danger'}[i.status] %>-subtle text-<%= {paid:'success',pending:'warning',partial:'info',overdue:'danger'}[i.status] %>"><%= i.status %></span></td><td class="small"><%= i.dueDate ? new Date(i.dueDate).toLocaleDateString('fr-FR') : '—' %></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/portal-shell-end') %>

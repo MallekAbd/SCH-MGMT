@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Formules</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"><style>body{font-family:Inter,sans-serif;background:#f8fafc}</style></head>
+<body><nav class="bg-white shadow-sm py-2"><div class="container d-flex justify-content-between"><a href="/super/dashboard" class="text-decoration-none fw-bold fs-5"><span style="color:#dc2626">⚡ Super</span></a><a href="/auth/logout" class="btn btn-sm btn-outline-danger">Déconnexion</a></div></nav>
+<div class="container py-4">
+<% if (locals.flashSuccess && flashSuccess.length) { %><div class="alert alert-success"><%= flashSuccess[0] %></div><% } %>
+<h3 class="fw-bold mb-3">Formules d'abonnement</h3>
+<div class="row g-3 mb-3">
+<% plans.forEach(p => { %>
+<div class="col-md-4"><div class="card border-0 shadow-sm"><div class="card-body">
+<div class="d-flex justify-content-between"><h5 class="fw-bold"><%= p.name %></h5><span class="badge bg-<%= p.isActive?'success':'secondary' %>"><%= p.isActive ? 'Active' : 'Inactive' %></span></div>
+<p class="text-muted small mb-1">Code: <%= p.code %></p>
+<p class="text-muted small">Limite: <strong><%= p.studentLimit %></strong> élèves</p>
+<table class="table table-sm small mb-0"><tbody>
+<tr><td>Mensuel</td><td class="text-end fw-bold"><%= p.prices.monthly.toLocaleString() %> DA</td></tr>
+<tr><td>Trimestriel</td><td class="text-end"><%= (p.prices.quarterly || 0).toLocaleString() %> DA</td></tr>
+<tr><td>Semestriel</td><td class="text-end"><%= (p.prices.semestrial || 0).toLocaleString() %> DA</td></tr>
+<tr><td>Annuel</td><td class="text-end"><%= (p.prices.yearly || 0).toLocaleString() %> DA</td></tr>
+</tbody></table>
+</div></div></div>
+<% }) %>
+</div>
+<div class="card border-0 shadow-sm"><div class="card-body">
+<h6 class="fw-bold mb-3">Créer une formule</h6>
+<form action="/super/plans" method="POST" class="row g-2">
+<div class="col-md-3"><label class="form-label small">Nom</label><input type="text" name="name" class="form-control" required></div>
+<div class="col-md-2"><label class="form-label small">Code</label><input type="text" name="code" class="form-control" required></div>
+<div class="col-md-2"><label class="form-label small">Limite élèves</label><input type="number" name="studentLimit" class="form-control" required></div>
+<div class="col-md-2"><label class="form-label small">Mensuel (DA)</label><input type="number" name="monthly" class="form-control" required></div>
+<div class="col-md-3"><label class="form-label small">Annuel (DA)</label><input type="number" name="yearly" class="form-control"></div>
+<div class="col-12"><button class="btn btn-primary">Créer</button></div>
+</form>
+</div></div>
+</div></body></html>

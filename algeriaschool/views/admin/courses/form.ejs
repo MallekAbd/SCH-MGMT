@@ -1,0 +1,16 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= course ? 'Modifier' : 'Nouvelle' %> matière</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="<%= course ? `/admin/courses/${course._id}?_method=PUT` : '/admin/courses' %>" method="POST" class="row g-3" style="max-width:800px">
+<div class="col-md-3"><label class="form-label">Code *</label><input type="text" name="code" class="form-control" value="<%= course?.code || '' %>" required></div>
+<div class="col-md-9"><label class="form-label">Nom *</label><input type="text" name="name" class="form-control" value="<%= course?.name || '' %>" required></div>
+<div class="col-md-6"><label class="form-label">Nom (Arabe)</label><input type="text" name="nameAr" class="form-control" value="<%= course?.nameAr || '' %>"></div>
+<div class="col-md-6"><label class="form-label">Secteur</label><select name="sector" class="form-select"><option value="">—</option><% sectors.forEach(s => { %><option value="<%= s._id %>" <%= course?.sector?.toString() === s._id.toString() ? 'selected' : '' %>><%= s.name %></option><% }) %></select></div>
+<div class="col-md-3"><label class="form-label">Crédits</label><input type="number" name="credits" class="form-control" value="<%= course?.credits || 1 %>"></div>
+<div class="col-md-3"><label class="form-label">Heures/semaine</label><input type="number" name="hoursPerWeek" class="form-control" value="<%= course?.hoursPerWeek || 1 %>"></div>
+<div class="col-md-6"><label class="form-label">Niveau</label><input type="text" name="level" class="form-control" value="<%= course?.level || '' %>"></div>
+<div class="col-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="3"><%= course?.description || '' %></textarea></div>
+<% if (course) { %><div class="col-12 form-check ms-3"><input type="checkbox" name="isActive" id="isActive" class="form-check-input" <%= course.isActive ? 'checked' : '' %>><label for="isActive" class="form-check-label">Actif</label></div><% } %>
+<div class="col-12"><a href="/admin/courses" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form></div></div>
+<%- include('../../partials/admin-shell-end') %>

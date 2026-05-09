@@ -1,0 +1,81 @@
+<div class="admin-sidebar" id="adminSidebar">
+  <div class="sidebar-brand">
+    <a href="/admin/dashboard" class="text-decoration-none">
+      <span class="brand-text"><span class="text-success">Algeria</span>School</span>
+    </a>
+    <button class="btn-close-sidebar d-lg-none" id="closeSidebar"><i class="fas fa-times"></i></button>
+  </div>
+  <% if (school) { %>
+  <div class="sidebar-school px-3 pb-3">
+    <div class="d-flex align-items-center gap-2">
+      <div class="school-avatar"><i class="fas fa-school"></i></div>
+      <div class="overflow-hidden">
+        <div class="fw-semibold small text-truncate"><%= school.name %></div>
+        <div class="text-muted" style="font-size:0.7rem;"><%= school.type %></div>
+      </div>
+    </div>
+  </div>
+  <% } %>
+  <nav class="sidebar-nav">
+    <div class="nav-section-title">Principal</div>
+    <a href="/admin/dashboard" class="nav-item <%= currentPath.includes('/dashboard') ? 'active' : '' %>">
+      <i class="fas fa-tachometer-alt"></i><span>Tableau de bord</span>
+    </a>
+    <div class="nav-section-title">Académique</div>
+    <a href="/admin/sectors" class="nav-item <%= currentPath.includes('/sectors') ? 'active' : '' %>">
+      <i class="fas fa-sitemap"></i><span>Secteurs</span>
+    </a>
+    <a href="/admin/courses" class="nav-item <%= currentPath.includes('/courses') ? 'active' : '' %>">
+      <i class="fas fa-book-open"></i><span>Matières</span>
+    </a>
+    <a href="/admin/classes" class="nav-item <%= currentPath.includes('/classes') ? 'active' : '' %>">
+      <i class="fas fa-chalkboard"></i><span>Classes</span>
+    </a>
+    <a href="/admin/students" class="nav-item <%= currentPath.includes('/students') ? 'active' : '' %>">
+      <i class="fas fa-user-graduate"></i><span>Élèves</span>
+    </a>
+    <a href="/admin/teachers" class="nav-item <%= currentPath.includes('/teachers') ? 'active' : '' %>">
+      <i class="fas fa-chalkboard-teacher"></i><span>Enseignants</span>
+    </a>
+    <a href="/admin/parents" class="nav-item <%= currentPath.includes('/parents') ? 'active' : '' %>">
+      <i class="fas fa-users"></i><span>Parents</span>
+    </a>
+    <div class="nav-section-title">Suivi</div>
+    <a href="/admin/attendance" class="nav-item <%= currentPath.includes('/attendance') ? 'active' : '' %>">
+      <i class="fas fa-clipboard-check"></i><span>Présences</span>
+    </a>
+    <a href="/admin/grades" class="nav-item <%= currentPath.includes('/grades') ? 'active' : '' %>">
+      <i class="fas fa-star-half-alt"></i><span>Notes</span>
+    </a>
+    <a href="/admin/library" class="nav-item <%= currentPath.includes('/library') ? 'active' : '' %>">
+      <i class="fas fa-book"></i><span>Bibliothèque</span>
+    </a>
+    <div class="nav-section-title">Finance</div>
+    <a href="/admin/billing" class="nav-item <%= currentPath.includes('/billing') ? 'active' : '' %>">
+      <i class="fas fa-file-invoice-dollar"></i><span>Facturation</span>
+    </a>
+    <a href="/admin/expenses" class="nav-item <%= currentPath.includes('/expenses') ? 'active' : '' %>">
+      <i class="fas fa-receipt"></i><span>Dépenses</span>
+    </a>
+    <div class="nav-section-title">Autres</div>
+    <a href="/admin/trainings" class="nav-item <%= currentPath.includes('/trainings') ? 'active' : '' %>">
+      <i class="fas fa-certificate"></i><span>Formations</span>
+    </a>
+    <a href="/admin/admissions" class="nav-item <%= currentPath.includes('/admissions') ? 'active' : '' %>">
+      <i class="fas fa-user-plus"></i><span>Admissions</span>
+    </a>
+    <a href="/admin/announcements" class="nav-item <%= currentPath.includes('/announcements') ? 'active' : '' %>">
+      <i class="fas fa-bullhorn"></i><span>Annonces</span>
+    </a>
+    <a href="/admin/messages" class="nav-item <%= currentPath.includes('/messages') ? 'active' : '' %>">
+      <i class="fas fa-envelope"></i><span>Messages</span>
+    </a>
+    <a href="/admin/access" class="nav-item <%= currentPath.includes('/access') ? 'active' : '' %>">
+      <i class="fas fa-shield-alt"></i><span>Accès</span>
+    </a>
+    <a href="/admin/settings" class="nav-item <%= currentPath.includes('/settings') ? 'active' : '' %>">
+      <i class="fas fa-cog"></i><span>Paramètres</span>
+    </a>
+  </nav>
+</div>
+<div class="sidebar-overlay d-lg-none" id="sidebarOverlay"></div>

@@ -1,0 +1,10 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3">Nouveau message</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="/admin/messages" method="POST" class="row g-3">
+<div class="col-12"><label class="form-label">Destinataire *</label><select name="recipient" class="form-select" required><% users.forEach(u => { %><option value="<%= u._id %>"><%= u.firstName %> <%= u.lastName %> (<%= u.role %>)</option><% }) %></select></div>
+<div class="col-12"><label class="form-label">Sujet</label><input type="text" name="subject" class="form-control"></div>
+<div class="col-12"><label class="form-label">Message *</label><textarea name="body" class="form-control" rows="6" required></textarea></div>
+<div class="col-12"><a href="/admin/messages" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Envoyer</button></div>
+</form></div></div>
+<%- include('../../partials/admin-shell-end') %>

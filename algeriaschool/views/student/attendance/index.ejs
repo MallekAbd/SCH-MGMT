@@ -1,0 +1,8 @@
+<% portalType='student'; portalLinks=[{href:'/student/dashboard',match:'/dashboard',icon:'home',label:'Accueil'},{href:'/student/grades',match:'/grades',icon:'star-half-alt',label:'Notes'},{href:'/student/attendance',match:'/attendance',icon:'clipboard-check',label:'Présences'},{href:'/student/schedule',match:'/schedule',icon:'calendar',label:'Emploi'},{href:'/student/library',match:'/library',icon:'book',label:'Biblio'},{href:'/student/invoices',match:'/invoices',icon:'file-invoice',label:'Factures'},{href:'/student/messages',match:'/messages',icon:'envelope',label:'Messages'}]; %>
+<%- include('../../partials/portal-shell-start') %>
+<h4 class="fw-bold mb-3">Mes présences</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table mb-0"><thead class="bg-light"><tr><th class="ps-3">Date</th><th>Statut</th><th>Note</th></tr></thead><tbody>
+<% if (!records || !records.length) { %><tr><td colspan="3" class="text-center text-muted py-4">Aucun enregistrement</td></tr><% } %>
+<% (records || []).forEach(r => { %><tr><td class="ps-3"><%= new Date(r.date).toLocaleDateString('fr-FR') %></td><td><span class="badge bg-<%= {present:'success',absent:'danger',late:'warning',excused:'info'}[r.status] %>-subtle text-<%= {present:'success',absent:'danger',late:'warning',excused:'info'}[r.status] %>"><%= r.status %></span></td><td class="small text-muted"><%= r.note || '—' %></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/portal-shell-end') %>

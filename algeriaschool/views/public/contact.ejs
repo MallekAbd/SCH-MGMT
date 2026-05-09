@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="<%= locals.lang || 'fr' %>"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><%= title %></title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"><link rel="stylesheet" href="/css/public.css"></head>
+<body><div class="container py-5">
+<h1 class="fw-bold mb-4">Contact</h1>
+<% if (locals.flashSuccess && flashSuccess.length) { %><div class="alert alert-success"><%= flashSuccess[0] %></div><% } %>
+<form action="/contact" method="POST" class="row g-3" style="max-width:600px">
+  <div class="col-md-6"><label class="form-label">Nom</label><input type="text" name="name" class="form-control" required></div>
+  <div class="col-md-6"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
+  <div class="col-12"><label class="form-label">Sujet</label><input type="text" name="subject" class="form-control" required></div>
+  <div class="col-12"><label class="form-label">Message</label><textarea name="message" class="form-control" rows="5" required></textarea></div>
+  <div class="col-12"><button type="submit" class="btn btn-primary">Envoyer</button></div>
+</form>
+</div></body></html>

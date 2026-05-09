@@ -1,0 +1,8 @@
+<% portalType='teacher'; portalLinks=[{href:'/teacher/dashboard',match:'/dashboard',icon:'home',label:'Accueil'},{href:'/teacher/attendance',match:'/attendance',icon:'clipboard-check',label:'Présences'},{href:'/teacher/grades',match:'/grades',icon:'star-half-alt',label:'Notes'},{href:'/teacher/library',match:'/library',icon:'book',label:'Biblio'},{href:'/teacher/schedule',match:'/schedule',icon:'calendar',label:'Emploi du temps'},{href:'/teacher/messages',match:'/messages',icon:'envelope',label:'Messages'}]; %>
+<%- include('../../partials/portal-shell-start') %>
+<div class="d-flex justify-content-between mb-3"><h4 class="fw-bold">Mes ressources</h4><a href="/teacher/library/new" class="btn btn-primary"><i class="fas fa-plus me-2"></i>Nouveau</a></div>
+<div class="row g-3">
+<% (items || []).forEach(i => { %><div class="col-md-4"><div class="card border-0 shadow-sm h-100"><div class="card-body"><span class="badge bg-info-subtle text-info"><%= i.type %></span><h6 class="fw-bold mt-2"><%= i.title %></h6><p class="text-muted small"><%= i.description || '' %></p></div></div></div><% }) %>
+<% if (!items || !items.length) { %><div class="col-12 text-center text-muted py-4">Aucune ressource</div><% } %>
+</div>
+<%- include('../../partials/portal-shell-end') %>

@@ -1,0 +1,13 @@
+<% portalType='parent'; portalLinks=[{href:'/parent/dashboard',match:'/dashboard',icon:'home',label:'Accueil'},{href:'/parent/grades',match:'/grades',icon:'star-half-alt',label:'Notes'},{href:'/parent/attendance',match:'/attendance',icon:'clipboard-check',label:'Présences'},{href:'/parent/invoices',match:'/invoices',icon:'file-invoice',label:'Factures'},{href:'/parent/messages',match:'/messages',icon:'envelope',label:'Messages'}]; %>
+<%- include('../../partials/portal-shell-start') %>
+<h4 class="fw-bold mb-3">Présences des enfants</h4>
+<% (childAttendance || []).forEach(c => { %>
+<div class="card border-0 shadow-sm mb-3"><div class="card-body">
+<h6 class="fw-bold"><%= c.student?.firstName %> <%= c.student?.lastName %></h6>
+<table class="table table-sm mb-0"><thead><tr><th>Date</th><th>Statut</th></tr></thead><tbody>
+<% (c.records || []).forEach(r => { %><tr><td><%= new Date(r.date).toLocaleDateString('fr-FR') %></td><td><span class="badge bg-<%= {present:'success',absent:'danger',late:'warning',excused:'info'}[r.status] %>-subtle text-<%= {present:'success',absent:'danger',late:'warning',excused:'info'}[r.status] %>"><%= r.status %></span></td></tr><% }) %>
+<% if (!c.records || !c.records.length) { %><tr><td colspan="2" class="text-center text-muted">Aucun enregistrement</td></tr><% } %>
+</tbody></table>
+</div></div>
+<% }) %>
+<%- include('../../partials/portal-shell-end') %>

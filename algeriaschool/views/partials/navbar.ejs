@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">
+      <span class="text-gradient">Algeria</span><span class="text-dark">School</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="/#features">Fonctionnalités</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#school-types">Types d'écoles</a></li>
+        <li class="nav-item"><a class="nav-link" href="/#pricing">Tarifs</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <div class="dropdown">
+          <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="fas fa-globe me-1"></i><%= lang.toUpperCase() %>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="?lang=fr">Français</a></li>
+            <li><a class="dropdown-item" href="?lang=ar">العربية</a></li>
+            <li><a class="dropdown-item" href="?lang=en">English</a></li>
+          </ul>
+        </div>
+        <% if (user) { %>
+          <a href="/admin/dashboard" class="btn btn-sm btn-outline-primary">Tableau de bord</a>
+        <% } else { %>
+          <a href="/auth/login" class="btn btn-sm btn-outline-primary">Connexion</a>
+          <a href="/auth/register" class="btn btn-sm btn-primary px-3">Essai gratuit</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

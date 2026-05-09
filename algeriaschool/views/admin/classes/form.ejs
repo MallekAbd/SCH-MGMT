@@ -1,0 +1,14 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= cls ? 'Modifier' : 'Nouvelle' %> classe</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="<%= cls ? `/admin/classes/${cls._id}?_method=PUT` : '/admin/classes' %>" method="POST" class="row g-3">
+<div class="col-md-6"><label class="form-label">Nom *</label><input type="text" name="name" class="form-control" value="<%= cls?.name || '' %>" required></div>
+<div class="col-md-3"><label class="form-label">Niveau</label><input type="text" name="level" class="form-control" value="<%= cls?.level || '' %>"></div>
+<div class="col-md-3"><label class="form-label">Année *</label><input type="text" name="academicYear" class="form-control" value="<%= cls?.academicYear || '2024-2025' %>" required></div>
+<div class="col-md-3"><label class="form-label">Capacité</label><input type="number" name="capacity" class="form-control" value="<%= cls?.capacity || 30 %>"></div>
+<div class="col-md-3"><label class="form-label">Salle</label><input type="text" name="room" class="form-control" value="<%= cls?.room || '' %>"></div>
+<div class="col-md-6"><label class="form-label">Enseignant principal</label><select name="homeTeacher" class="form-select"><option value="">—</option><% teachers.forEach(t => { %><option value="<%= t._id %>" <%= cls?.homeTeacher?.toString() === t._id.toString() ? 'selected' : '' %>><%= t.user?.firstName %> <%= t.user?.lastName %></option><% }) %></select></div>
+<div class="col-12"><label class="form-label">Matières</label><select name="courses" class="form-select" multiple size="6"><% courses.forEach(c => { %><option value="<%= c._id %>" <%= cls?.courses?.find(cc => cc.toString() === c._id.toString()) ? 'selected' : '' %>><%= c.code %> — <%= c.name %></option><% }) %></select><small class="text-muted">Maintenez Ctrl pour sélection multiple</small></div>
+<div class="col-12"><a href="/admin/classes" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form></div></div>
+<%- include('../../partials/admin-shell-end') %>

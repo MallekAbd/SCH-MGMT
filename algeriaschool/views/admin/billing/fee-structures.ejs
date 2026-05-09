@@ -1,0 +1,22 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3">Structures tarifaires</h4>
+<div class="row g-3">
+<div class="col-lg-5">
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<h6 class="fw-bold mb-3">Nouvelle structure</h6>
+<form action="/admin/billing/fee-structures" method="POST" class="row g-2">
+<div class="col-12"><label class="form-label small">Nom *</label><input type="text" name="name" class="form-control" required></div>
+<div class="col-md-6"><label class="form-label small">Type</label><select name="type" class="form-select"><% ['tuition','registration','transport','meals','other'].forEach(t => { %><option value="<%= t %>"><%= t %></option><% }) %></select></div>
+<div class="col-md-6"><label class="form-label small">Période</label><select name="billingPeriod" class="form-select"><% ['monthly','quarterly','semestrial','yearly','one_time'].forEach(p => { %><option value="<%= p %>"><%= p %></option><% }) %></select></div>
+<div class="col-md-6"><label class="form-label small">Montant (DA) *</label><input type="number" name="amount" class="form-control" required></div>
+<div class="col-md-6"><label class="form-label small">Année</label><input type="text" name="academicYear" class="form-control" value="2024-2025"></div>
+<div class="col-12"><label class="form-label small">Classes (optionnel)</label><select name="applicableClasses" class="form-select" multiple size="4"><% classes.forEach(c => { %><option value="<%= c._id %>"><%= c.name %></option><% }) %></select></div>
+<div class="col-12"><button type="submit" class="btn btn-primary w-100">Créer</button></div>
+</form>
+</div></div></div>
+<div class="col-lg-7"><div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table mb-0"><thead class="bg-light"><tr><th class="ps-3">Nom</th><th>Type</th><th>Montant</th><th>Période</th></tr></thead><tbody>
+<% if (!feeStructures.length) { %><tr><td colspan="4" class="text-center text-muted py-4">Aucune structure</td></tr><% } %>
+<% feeStructures.forEach(f => { %><tr><td class="ps-3 fw-medium"><%= f.name %></td><td><%= f.type %></td><td><%= f.amount.toLocaleString() %> DA</td><td><%= f.billingPeriod %></td></tr><% }) %>
+</tbody></table></div></div></div>
+</div>
+<%- include('../../partials/admin-shell-end') %>

@@ -1,0 +1,23 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= teacher ? 'Modifier' : 'Ajouter' %> un enseignant</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="<%= teacher ? `/admin/teachers/${teacher._id}?_method=PUT` : '/admin/teachers' %>" method="POST" enctype="multipart/form-data" class="row g-3">
+<div class="col-md-6"><label class="form-label">Prénom *</label><input type="text" name="firstName" class="form-control" value="<%= teacher?.user?.firstName || '' %>" required></div>
+<div class="col-md-6"><label class="form-label">Nom *</label><input type="text" name="lastName" class="form-control" value="<%= teacher?.user?.lastName || '' %>" required></div>
+<% if (!teacher) { %>
+<div class="col-md-6"><label class="form-label">Email *</label><input type="email" name="email" class="form-control" required></div>
+<div class="col-md-6"><label class="form-label">Mot de passe</label><input type="text" name="password" class="form-control" placeholder="Auto-généré si vide"></div>
+<% } %>
+<div class="col-md-6"><label class="form-label">Téléphone</label><input type="tel" name="phone" class="form-control" value="<%= teacher?.user?.phone || '' %>"></div>
+<div class="col-md-6"><label class="form-label">Spécialisation</label><input type="text" name="specialization" class="form-control" value="<%= teacher?.specialization || '' %>"></div>
+<div class="col-md-12"><label class="form-label">Qualifications (séparées par virgule)</label><input type="text" name="qualifications" class="form-control" value="<%= (teacher?.qualifications || []).join(', ') %>"></div>
+<div class="col-md-4"><label class="form-label">Type contrat</label><select name="contractType" class="form-select"><% ['permanent','contract','part_time'].forEach(t => { %><option value="<%= t %>" <%= teacher?.contractType===t?'selected':'' %>><%= t %></option><% }) %></select></div>
+<div class="col-md-4"><label class="form-label">Salaire base (DA)</label><input type="number" name="salaryBase" class="form-control" value="<%= teacher?.salaryBase || 0 %>"></div>
+<div class="col-md-4"><label class="form-label">Date d'embauche</label><input type="date" name="joinDate" class="form-control" value="<%= teacher?.joinDate ? new Date(teacher.joinDate).toISOString().slice(0,10) : '' %>"></div>
+<div class="col-md-6"><label class="form-label">Matières</label><select name="courses" class="form-select" multiple size="5"><% courses.forEach(c => { %><option value="<%= c._id %>" <%= teacher?.courses?.find(cc => cc.toString() === c._id.toString()) ? 'selected' : '' %>><%= c.name %></option><% }) %></select></div>
+<div class="col-md-6"><label class="form-label">Classes</label><select name="classes" class="form-select" multiple size="5"><% classes.forEach(c => { %><option value="<%= c._id %>" <%= teacher?.classes?.find(cc => cc.toString() === c._id.toString()) ? 'selected' : '' %>><%= c.name %></option><% }) %></select></div>
+<div class="col-md-6"><label class="form-label">Photo</label><input type="file" name="photo" class="form-control" accept="image/*"></div>
+<% if (teacher) { %><div class="col-12 form-check ms-3"><input type="checkbox" name="isActive" id="isActive" class="form-check-input" <%= teacher.isActive ? 'checked' : '' %>><label for="isActive" class="form-check-label">Actif</label></div><% } %>
+<div class="col-12"><a href="/admin/teachers" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form></div></div>
+<%- include('../../partials/admin-shell-end') %>

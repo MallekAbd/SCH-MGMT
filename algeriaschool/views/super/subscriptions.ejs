@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Abonnements</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"><style>body{font-family:Inter,sans-serif;background:#f8fafc}</style></head>
+<body><nav class="bg-white shadow-sm py-2"><div class="container d-flex justify-content-between"><a href="/super/dashboard" class="text-decoration-none fw-bold fs-5"><span style="color:#dc2626">⚡ Super</span></a><a href="/auth/logout" class="btn btn-sm btn-outline-danger">Déconnexion</a></div></nav>
+<div class="container py-4">
+<% if (locals.flashSuccess && flashSuccess.length) { %><div class="alert alert-success"><%= flashSuccess[0] %></div><% } %>
+<h3 class="fw-bold mb-3">Abonnements</h3>
+<div class="row g-3">
+<div class="col-md-4"><div class="card border-0 shadow-sm"><div class="card-body p-3">
+<h6 class="fw-bold mb-3">Créer un abonnement</h6>
+<form action="/super/subscriptions" method="POST">
+<div class="mb-2"><label class="form-label small">École</label><select name="schoolId" class="form-select form-select-sm" required><% schools.forEach(s => { %><option value="<%= s._id %>"><%= s.name %></option><% }) %></select></div>
+<div class="mb-2"><label class="form-label small">Plan</label><select name="planId" class="form-select form-select-sm" required><% plans.forEach(p => { %><option value="<%= p._id %>"><%= p.name %></option><% }) %></select></div>
+<div class="mb-2"><label class="form-label small">Période</label><select name="period" class="form-select form-select-sm"><% ['monthly','quarterly','semestrial','biannual','yearly'].forEach(p => { %><option value="<%= p %>"><%= p %></option><% }) %></select></div>
+<div class="mb-2"><label class="form-label small">Méthode de paiement</label><select name="paymentMethod" class="form-select form-select-sm"><option value="cash">Espèces</option><option value="bank_transfer">Virement</option><option value="ccp">CCP</option><option value="baridibank">BaridiBank</option></select></div>
+<div class="mb-2"><label class="form-label small">Référence</label><input type="text" name="paymentRef" class="form-control form-control-sm"></div>
+<button type="submit" class="btn btn-primary w-100 btn-sm">Créer & Activer</button>
+</form>
+</div></div></div>
+<div class="col-md-8"><div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table mb-0"><thead class="bg-light"><tr><th class="ps-3">École</th><th>Plan</th><th>Statut</th><th>Fin</th><th></th></tr></thead><tbody>
+<% subs.forEach(s => { %><tr><td class="ps-3 fw-medium"><%= s.school?.name %></td><td><%= s.plan?.name %></td><td><span class="badge bg-<%= {active:'success',trial:'info',expired:'danger',grace:'warning',locked:'dark'}[s.status] %>"><%= s.status %></span></td><td class="small"><%= new Date(s.endDate).toLocaleDateString('fr-FR') %></td><td class="text-end pe-3"><% if (s.status !== 'active') { %><form action="/super/subscriptions/<%= s._id %>/confirm?_method=PUT" method="POST" class="d-inline"><button class="btn btn-sm btn-success">Activer</button></form><% } %></td></tr><% }) %>
+</tbody></table></div></div></div>
+</div>
+</div></body></html>

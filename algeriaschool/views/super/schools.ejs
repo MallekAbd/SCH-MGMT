@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>Écoles</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><style>body{font-family:Inter,sans-serif;background:#f8fafc}</style></head>
+<body><nav class="bg-white shadow-sm py-2"><div class="container d-flex justify-content-between"><a href="/super/dashboard" class="text-decoration-none fw-bold fs-5"><span style="color:#dc2626">⚡ Super</span></a><div><a href="/super/schools" class="btn btn-sm btn-light">Écoles</a> <a href="/super/subscriptions" class="btn btn-sm btn-light">Abonnements</a> <a href="/super/plans" class="btn btn-sm btn-light">Formules</a> <a href="/auth/logout" class="btn btn-sm btn-outline-danger">Déconnexion</a></div></div></nav>
+<div class="container py-4">
+<h3 class="fw-bold mb-3">Toutes les écoles (<%= schools.length %>)</h3>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table mb-0"><thead class="bg-light"><tr><th class="ps-3">Nom</th><th>Type</th><th>Plan</th><th>Statut</th><th>Créée</th><th></th></tr></thead><tbody>
+<% schools.forEach(s => { %><tr><td class="ps-3 fw-medium"><%= s.name %></td><td><%= s.type %></td><td><%= s.subscription?.status || '—' %></td><td><% if (s.isLocked) { %><span class="badge bg-danger">Verrouillée</span><% } else { %><span class="badge bg-success">Active</span><% } %></td><td class="small"><%= new Date(s.createdAt).toLocaleDateString('fr-FR') %></td><td class="text-end pe-3"><a href="/super/schools/<%= s._id %>" class="btn btn-sm btn-primary">Détails</a></td></tr><% }) %>
+</tbody></table></div></div>
+</div></body></html>

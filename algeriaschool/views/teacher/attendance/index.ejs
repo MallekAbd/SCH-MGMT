@@ -1,0 +1,9 @@
+<% portalType='teacher'; portalLinks=[{href:'/teacher/dashboard',match:'/dashboard',icon:'home',label:'Accueil'},{href:'/teacher/attendance',match:'/attendance',icon:'clipboard-check',label:'Présences'},{href:'/teacher/grades',match:'/grades',icon:'star-half-alt',label:'Notes'},{href:'/teacher/library',match:'/library',icon:'book',label:'Biblio'},{href:'/teacher/schedule',match:'/schedule',icon:'calendar',label:'Emploi du temps'},{href:'/teacher/messages',match:'/messages',icon:'envelope',label:'Messages'}]; %>
+<%- include('../../partials/portal-shell-start') %>
+<h4 class="fw-bold mb-3">Présences</h4>
+<div class="card border-0 shadow-sm mb-3"><div class="card-body"><h6 class="mb-2">Marquer la présence</h6><div class="d-flex flex-wrap gap-2"><% (classes || []).forEach(c => { %><a href="/teacher/attendance/mark/<%= c._id %>" class="btn btn-outline-primary btn-sm"><%= c.name %></a><% }) %></div></div></div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table mb-0"><thead class="bg-light"><tr><th class="ps-3">Date</th><th>Classe</th><th>Élèves</th></tr></thead><tbody>
+<% if (!attendances || !attendances.length) { %><tr><td colspan="3" class="text-center text-muted py-4">Aucun enregistrement</td></tr><% } %>
+<% (attendances || []).forEach(a => { %><tr><td class="ps-3"><%= new Date(a.date).toLocaleDateString('fr-FR') %></td><td><%= a.class?.name %></td><td><%= (a.records||[]).length %></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/portal-shell-end') %>

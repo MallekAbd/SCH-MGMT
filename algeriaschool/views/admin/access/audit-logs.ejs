@@ -1,0 +1,7 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3">Journal d'audit</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table table-hover mb-0"><thead class="bg-light"><tr><th class="ps-3">Date</th><th>Utilisateur</th><th>Action</th><th>Module</th><th>IP</th></tr></thead><tbody>
+<% if (!logs.length) { %><tr><td colspan="5" class="text-center text-muted py-4">Aucune activité</td></tr><% } %>
+<% logs.forEach(l => { %><tr><td class="ps-3 small"><%= new Date(l.createdAt).toLocaleString('fr-FR') %></td><td><%= l.user?.firstName %> <%= l.user?.lastName %></td><td><%= l.action %></td><td><%= l.module || '—' %></td><td class="small text-muted"><%= l.ipAddress || '—' %></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/admin-shell-end') %>

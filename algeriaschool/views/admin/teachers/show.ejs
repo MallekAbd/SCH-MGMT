@@ -1,0 +1,15 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= teacher.user.firstName %> <%= teacher.user.lastName %></h4>
+<div class="card border-0 shadow-sm"><div class="card-body">
+<div class="row g-3 small">
+<div class="col-md-6"><strong>Email:</strong> <%= teacher.user.email %></div>
+<div class="col-md-6"><strong>Téléphone:</strong> <%= teacher.user.phone || '—' %></div>
+<div class="col-md-6"><strong>Spécialisation:</strong> <%= teacher.specialization || '—' %></div>
+<div class="col-md-6"><strong>Type:</strong> <%= teacher.contractType %></div>
+<div class="col-md-6"><strong>Salaire:</strong> <%= teacher.salaryBase || 0 %> DA</div>
+<div class="col-md-6"><strong>Heures/sem:</strong> <%= teacher.hoursPerWeek || 0 %></div>
+<div class="col-12"><strong>Matières:</strong> <% (teacher.courses || []).forEach(c => { %><span class="badge bg-light text-dark me-1"><%= c.name %></span><% }) %></div>
+<div class="col-12"><strong>Classes:</strong> <% (teacher.classes || []).forEach(c => { %><span class="badge bg-light text-dark me-1"><%= c.name %></span><% }) %></div>
+</div>
+</div></div>
+<%- include('../../partials/admin-shell-end') %>

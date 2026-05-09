@@ -1,0 +1,8 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3">Demandes d'admission</h4>
+<div class="card border-0 shadow-sm mb-3"><div class="card-body py-2"><form method="GET" class="row g-2"><div class="col-md-3"><select name="status" class="form-select"><option value="">Tous statuts</option><% ['pending','reviewing','approved','rejected','enrolled'].forEach(s => { %><option value="<%= s %>" <%= status===s?'selected':'' %>><%= s %></option><% }) %></select></div><div class="col-md-2"><button class="btn btn-light w-100">Filtrer</button></div></form></div></div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table table-hover mb-0"><thead class="bg-light"><tr><th class="ps-3">Date</th><th>Candidat</th><th>Classe</th><th>Parent</th><th>Statut</th><th></th></tr></thead><tbody>
+<% if (!applications.length) { %><tr><td colspan="6" class="text-center text-muted py-4">Aucune demande</td></tr><% } %>
+<% applications.forEach(a => { %><tr><td class="ps-3 small"><%= new Date(a.createdAt).toLocaleDateString('fr-FR') %></td><td class="fw-medium"><%= a.firstName %> <%= a.lastName %></td><td><%= a.applyingForClass || '—' %></td><td class="small"><%= a.parentName %><br><span class="text-muted"><%= a.parentPhone %></span></td><td><span class="badge bg-<%= {pending:'warning',reviewing:'info',approved:'success',rejected:'danger',enrolled:'primary'}[a.status] %>-subtle text-<%= {pending:'warning',reviewing:'info',approved:'success',rejected:'danger',enrolled:'primary'}[a.status] %>"><%= a.status %></span></td><td class="text-end pe-3"><a href="/admin/admissions/<%= a._id %>" class="btn btn-sm btn-primary">Voir</a></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/admin-shell-end') %>

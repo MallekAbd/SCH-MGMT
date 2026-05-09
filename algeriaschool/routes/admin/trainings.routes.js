@@ -1,0 +1,13 @@
+const express = require('express');
+const router = express.Router();
+const ctrl = require('../../controllers/admin/trainingsController');
+router.get('/', ctrl.index);
+router.get('/new', ctrl.create);
+router.post('/', ctrl.store);
+router.get('/:id', ctrl.show);
+router.get('/:id/edit', ctrl.edit);
+router.put('/:id', ctrl.update);
+router.delete('/:id', ctrl.destroy);
+router.post('/:id/enroll', ctrl.enroll);
+router.get('/:id/certificate/:userId', ctrl.certificate);
+module.exports = router;

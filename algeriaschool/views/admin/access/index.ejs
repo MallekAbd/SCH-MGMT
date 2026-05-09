@@ -1,0 +1,12 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0">Gestion des accès</h4><div><a href="/admin/access/logs" class="btn btn-light me-2"><i class="fas fa-history me-2"></i>Audit</a><a href="/admin/access/roles/new" class="btn btn-primary"><i class="fas fa-plus me-2"></i>Nouveau rôle</a></div></div>
+<div class="row g-3">
+<div class="col-md-6"><div class="card border-0 shadow-sm"><div class="card-body"><h6 class="fw-bold mb-3">Rôles personnalisés</h6>
+<% if (!roles.length) { %><p class="text-muted small">Aucun rôle personnalisé</p><% } %>
+<% roles.forEach(r => { %><div class="d-flex justify-content-between align-items-center py-2 border-bottom"><span class="fw-medium"><%= r.name %></span><div><a href="/admin/access/roles/<%= r._id %>/edit" class="btn btn-sm btn-light"><i class="fas fa-edit"></i></a><form action="/admin/access/roles/<%= r._id %>?_method=DELETE" method="POST" class="d-inline" data-confirm="Supprimer ?"><button class="btn btn-sm btn-light text-danger"><i class="fas fa-trash"></i></button></form></div></div><% }) %>
+</div></div></div>
+<div class="col-md-6"><div class="card border-0 shadow-sm"><div class="card-body"><h6 class="fw-bold mb-3">Utilisateurs (<%= users.length %>)</h6>
+<% users.slice(0,15).forEach(u => { %><div class="d-flex justify-content-between py-1 border-bottom small"><span><%= u.firstName %> <%= u.lastName %></span><span class="badge bg-light text-dark"><%= u.role %></span></div><% }) %>
+</div></div></div>
+</div>
+<%- include('../../partials/admin-shell-end') %>

@@ -1,0 +1,7 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0">Parents</h4><a href="/admin/parents/new" class="btn btn-primary rounded-pill"><i class="fas fa-plus me-2"></i>Ajouter</a></div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table table-hover mb-0"><thead class="bg-light"><tr><th class="ps-3">Nom</th><th>Email</th><th>Téléphone</th><th>Lien</th><th>Enfants</th><th></th></tr></thead><tbody>
+<% if (!parents.length) { %><tr><td colspan="6" class="text-center text-muted py-4">Aucun parent</td></tr><% } %>
+<% parents.forEach(p => { %><tr><td class="ps-3 fw-medium"><%= p.user?.firstName %> <%= p.user?.lastName %></td><td><%= p.user?.email %></td><td><%= p.user?.phone || '—' %></td><td><%= p.relationship %></td><td><%= (p.students || []).length %></td><td class="text-end pe-3"><a href="/admin/parents/<%= p._id %>/edit" class="btn btn-sm btn-light"><i class="fas fa-edit"></i></a><form action="/admin/parents/<%= p._id %>?_method=DELETE" method="POST" class="d-inline" data-confirm="Supprimer ?"><button class="btn btn-sm btn-light text-danger"><i class="fas fa-trash"></i></button></form></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/admin-shell-end') %>

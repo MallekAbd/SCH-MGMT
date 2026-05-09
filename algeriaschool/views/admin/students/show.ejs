@@ -1,0 +1,15 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0"><%= student.firstName %> <%= student.lastName %></h4><div><a href="/admin/students/<%= student._id %>/id-card" class="btn btn-light me-2"><i class="fas fa-id-card me-2"></i>Carte PDF</a><a href="/admin/students/<%= student._id %>/edit" class="btn btn-primary"><i class="fas fa-edit me-2"></i>Modifier</a></div></div>
+<div class="row g-3">
+<div class="col-md-4"><div class="card border-0 shadow-sm text-center"><div class="card-body"><div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold mx-auto mb-2" style="width:80px;height:80px;font-size:2rem"><%= student.firstName.charAt(0) %></div><h5 class="fw-bold mb-1"><%= student.firstName %> <%= student.lastName %></h5><div class="text-muted small mb-2"><%= student.studentId || '—' %></div><span class="badge bg-success-subtle text-success"><%= student.status %></span></div></div></div>
+<div class="col-md-8"><div class="card border-0 shadow-sm"><div class="card-body"><h6 class="text-muted small mb-3">INFORMATIONS</h6>
+<div class="row small g-2">
+<div class="col-md-6"><strong>Date naissance:</strong> <%= student.dateOfBirth ? new Date(student.dateOfBirth).toLocaleDateString('fr-FR') : '—' %></div>
+<div class="col-md-6"><strong>Genre:</strong> <%= student.gender || '—' %></div>
+<div class="col-md-6"><strong>Wilaya:</strong> <%= student.wilaya || '—' %></div>
+<div class="col-md-6"><strong>Adresse:</strong> <%= student.address || '—' %></div>
+<div class="col-md-6"><strong>Classe:</strong> <%= student.currentClass?.name || '—' %></div>
+<div class="col-md-6"><strong>Inscrit le:</strong> <%= student.admissionDate ? new Date(student.admissionDate).toLocaleDateString('fr-FR') : '—' %></div>
+</div></div></div></div>
+</div>
+<%- include('../../partials/admin-shell-end') %>

@@ -1,0 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const ctrl = require('../../controllers/admin/gradesController');
+router.get('/', ctrl.index);
+router.get('/exams', ctrl.examsIndex);
+router.get('/exams/new', ctrl.createExam);
+router.post('/exams', ctrl.storeExam);
+router.get('/enter/:examId', ctrl.enterGrades);
+router.post('/enter/:examId', ctrl.saveGrades);
+router.get('/report-card/:studentId', ctrl.reportCard);
+router.get('/report-card/:studentId/pdf', ctrl.reportCardPdf);
+module.exports = router;

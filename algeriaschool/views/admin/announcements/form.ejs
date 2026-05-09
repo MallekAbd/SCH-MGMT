@@ -1,0 +1,11 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= announcement ? 'Modifier' : 'Nouvelle' %> annonce</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="<%= announcement ? `/admin/announcements/${announcement._id}?_method=PUT` : '/admin/announcements' %>" method="POST" class="row g-3">
+<div class="col-12"><label class="form-label">Titre *</label><input type="text" name="title" class="form-control" value="<%= announcement?.title || '' %>" required></div>
+<div class="col-12"><label class="form-label">Contenu *</label><textarea name="content" class="form-control" rows="6" required><%= announcement?.content || '' %></textarea></div>
+<div class="col-md-6"><label class="form-label">Cible</label><select name="targetRoles" class="form-select" multiple size="4"><% ['all','teacher','student','parent'].forEach(r => { %><option value="<%= r %>" <%= announcement?.targetRoles?.includes(r) ? 'selected' : '' %>><%= r %></option><% }) %></select></div>
+<div class="col-md-6"><label class="form-label">Expire le</label><input type="date" name="expiresAt" class="form-control" value="<%= announcement?.expiresAt ? new Date(announcement.expiresAt).toISOString().slice(0,10) : '' %>"><div class="form-check mt-2"><input type="checkbox" name="isPinned" id="isPinned" class="form-check-input" <%= announcement?.isPinned ? 'checked' : '' %>><label for="isPinned">Épingler</label></div></div>
+<div class="col-12"><a href="/admin/announcements" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Publier</button></div>
+</form></div></div>
+<%- include('../../partials/admin-shell-end') %>

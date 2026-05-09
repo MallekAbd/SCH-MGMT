@@ -1,0 +1,7 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0">Formations</h4><a href="/admin/trainings/new" class="btn btn-primary rounded-pill"><i class="fas fa-plus me-2"></i>Nouvelle</a></div>
+<div class="row g-3">
+<% if (!trainings.length) { %><div class="col-12 text-center text-muted py-4">Aucune formation</div><% } %>
+<% trainings.forEach(t => { %><div class="col-md-4"><div class="card border-0 shadow-sm h-100"><div class="card-body"><h6 class="fw-bold"><%= t.name %></h6><p class="text-muted small"><%= t.description || '' %></p><div class="small"><strong>Durée:</strong> <%= t.duration || '—' %></div><div class="small"><strong>Frais:</strong> <%= (t.fee||0).toLocaleString() %> DA</div><div class="small"><strong>Inscrits:</strong> <%= (t.enrollees||[]).length %>/<%= t.maxParticipants %></div><div class="mt-2"><a href="/admin/trainings/<%= t._id %>" class="btn btn-sm btn-primary">Voir</a></div></div></div></div><% }) %>
+</div>
+<%- include('../../partials/admin-shell-end') %>

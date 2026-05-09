@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="<%= locals.lang || 'fr' %>">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion | AlgeriaSchool</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #f0fdf4 100%); min-height: 100vh; display: flex; align-items: center; }
+    .auth-card { border-radius: 20px; border: none; box-shadow: 0 20px 60px rgba(0,0,0,.08); }
+    .auth-brand span:first-child { background: linear-gradient(135deg,#4f46e5,#06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .btn-primary { background: linear-gradient(135deg,#4f46e5,#6366f1); border: none; }
+    .form-control:focus { border-color: #4f46e5; box-shadow: 0 0 0 .2rem rgba(79,70,229,.15); }
+    .divider { text-align: center; position: relative; margin: 1rem 0; }
+    .divider::before { content:''; position: absolute; top: 50%; left: 0; right: 0; border-top: 1px solid #e2e8f0; }
+    .divider span { background: #fff; padding: 0 .75rem; position: relative; color: #94a3b8; font-size: .8rem; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5 col-lg-4">
+      <div class="text-center mb-4">
+        <a href="/" class="text-decoration-none fs-3 fw-bold auth-brand"><span>Algeria</span><span style="color:#1e293b">School</span></a>
+        <p class="text-muted mt-2 small">Connectez-vous à votre espace</p>
+      </div>
+      <div class="card auth-card p-4">
+        <% if (locals.flashError && flashError.length) { %>
+        <div class="alert alert-danger rounded-2 py-2 small"><i class="fas fa-exclamation-circle me-2"></i><%= flashError[0] %></div>
+        <% } %>
+        <% if (locals.flashSuccess && flashSuccess.length) { %>
+        <div class="alert alert-success rounded-2 py-2 small"><i class="fas fa-check-circle me-2"></i><%= flashSuccess[0] %></div>
+        <% } %>
+        <form action="/auth/login" method="POST">
+          <input type="hidden" name="redirect" value="<%= locals.redirect || '/dashboard' %>">
+          <div class="mb-3">
+            <label class="form-label fw-medium small">Adresse email</label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-end-0"><i class="fas fa-envelope text-muted"></i></span>
+              <input type="email" name="email" class="form-control border-start-0 ps-0" placeholder="votre@email.com" required autocomplete="email">
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <label class="form-label fw-medium small mb-0">Mot de passe</label>
+              <a href="/auth/forgot-password" class="small text-decoration-none" style="color:#4f46e5">Oublié ?</a>
+            </div>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-end-0"><i class="fas fa-lock text-muted"></i></span>
+              <input type="password" name="password" id="password" class="form-control border-start-0 ps-0" placeholder="••••••••" required autocomplete="current-password">
+              <button class="btn btn-light border border-start-0" type="button" onclick="togglePwd()"><i class="fas fa-eye text-muted" id="eyeIcon"></i></button>
+            </div>
+          </div>
+          <div class="mb-4 d-flex align-items-center">
+            <input type="checkbox" name="remember" id="remember" class="form-check-input me-2">
+            <label for="remember" class="form-check-label small">Se souvenir de moi</label>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-semibold">Se connecter</button>
+        </form>
+        <div class="divider mt-4"><span>Pas encore de compte ?</span></div>
+        <a href="/auth/register" class="btn btn-outline-primary w-100 rounded-pill py-2 fw-semibold">Créer un compte école</a>
+      </div>
+      <div class="text-center mt-3">
+        <small class="text-muted">
+          <strong>Démo:</strong> admin@demo.test / Admin@123
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function togglePwd() {
+  const p = document.getElementById('password');
+  const i = document.getElementById('eyeIcon');
+  p.type = p.type === 'password' ? 'text' : 'password';
+  i.className = p.type === 'password' ? 'fas fa-eye text-muted' : 'fas fa-eye-slash text-muted';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<% portalType='teacher'; portalLinks=[{href:'/teacher/dashboard',match:'/dashboard',icon:'home',label:'Accueil'},{href:'/teacher/attendance',match:'/attendance',icon:'clipboard-check',label:'Présences'},{href:'/teacher/grades',match:'/grades',icon:'star-half-alt',label:'Notes'},{href:'/teacher/library',match:'/library',icon:'book',label:'Biblio'},{href:'/teacher/schedule',match:'/schedule',icon:'calendar',label:'Emploi du temps'},{href:'/teacher/messages',match:'/messages',icon:'envelope',label:'Messages'}]; %>
+<%- include('../partials/portal-shell-start') %>
+<div class="card border-0 mb-4" style="background:linear-gradient(135deg,#10b981,#06b6d4);border-radius:16px"><div class="card-body p-4 text-white"><h4 class="fw-bold mb-1">Bonjour, <%= user.firstName %> 👋</h4><p class="mb-0 opacity-75">Bienvenue dans votre espace enseignant</p></div></div>
+<div class="row g-3 mb-4">
+<div class="col-md-3"><div class="card border-0 shadow-sm"><div class="card-body"><div class="text-muted small">Mes classes</div><div class="fw-bold fs-3"><%= stats?.classes || 0 %></div></div></div></div>
+<div class="col-md-3"><div class="card border-0 shadow-sm"><div class="card-body"><div class="text-muted small">Mes matières</div><div class="fw-bold fs-3"><%= stats?.courses || 0 %></div></div></div></div>
+<div class="col-md-3"><div class="card border-0 shadow-sm"><div class="card-body"><div class="text-muted small">Mes élèves</div><div class="fw-bold fs-3"><%= stats?.students || 0 %></div></div></div></div>
+<div class="col-md-3"><div class="card border-0 shadow-sm"><div class="card-body"><div class="text-muted small">Examens à corriger</div><div class="fw-bold fs-3"><%= stats?.pendingExams || 0 %></div></div></div></div>
+</div>
+<div class="row g-3">
+<div class="col-md-6"><div class="card border-0 shadow-sm"><div class="card-body"><h6 class="fw-bold mb-3">Mes classes</h6><% (classes || []).forEach(c => { %><div class="border-bottom py-2 d-flex justify-content-between"><span><%= c.name %></span><a href="/teacher/attendance/mark/<%= c._id %>" class="btn btn-sm btn-outline-primary">Marquer présence</a></div><% }) %><% if (!classes || !classes.length) { %><p class="text-muted small">Aucune classe assignée</p><% } %></div></div></div>
+<div class="col-md-6"><div class="card border-0 shadow-sm"><div class="card-body"><h6 class="fw-bold mb-3">Annonces récentes</h6><% (announcements || []).forEach(a => { %><div class="border-bottom py-2"><strong class="small"><%= a.title %></strong><div class="text-muted" style="font-size:0.75rem"><%= new Date(a.createdAt).toLocaleDateString('fr-FR') %></div></div><% }) %><% if (!announcements || !announcements.length) { %><p class="text-muted small">Aucune annonce</p><% } %></div></div></div>
+</div>
+<%- include('../partials/portal-shell-end') %>

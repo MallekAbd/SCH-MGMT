@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const ctrl = require('../../controllers/admin/accessController');
+router.get('/', ctrl.index);
+router.get('/roles/new', ctrl.createRole);
+router.post('/roles', ctrl.storeRole);
+router.get('/roles/:id/edit', ctrl.editRole);
+router.put('/roles/:id', ctrl.updateRole);
+router.delete('/roles/:id', ctrl.destroyRole);
+router.get('/logs', ctrl.auditLogs);
+module.exports = router;

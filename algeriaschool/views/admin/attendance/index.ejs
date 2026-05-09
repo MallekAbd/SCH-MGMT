@@ -1,0 +1,8 @@
+<%- include('../../partials/admin-shell-start') %>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold mb-0">Présences</h4><a href="/admin/attendance/report" class="btn btn-light"><i class="fas fa-file-alt me-2"></i>Rapport</a></div>
+<div class="card border-0 shadow-sm mb-3"><div class="card-body py-3"><h6 class="mb-2">Marquer la présence</h6><div class="d-flex flex-wrap gap-2"><% classes.forEach(c => { %><a href="/admin/attendance/mark/<%= c._id %>" class="btn btn-outline-primary btn-sm"><%= c.name %></a><% }) %></div></div></div>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table table-hover mb-0"><thead class="bg-light"><tr><th class="ps-3">Date</th><th>Classe</th><th>Élèves</th></tr></thead><tbody>
+<% if (!attendances.length) { %><tr><td colspan="3" class="text-center text-muted py-4">Aucun enregistrement</td></tr><% } %>
+<% attendances.forEach(a => { %><tr><td class="ps-3"><%= new Date(a.date).toLocaleDateString('fr-FR') %></td><td><%= a.class?.name %></td><td><%= (a.records || []).length %> enregistrements</td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/admin-shell-end') %>

@@ -1,0 +1,24 @@
+* { box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #1e293b; line-height: 1.6; }
+[dir="rtl"] body, .lang-ar { font-family: 'Cairo', sans-serif; }
+
+.text-gradient { background: linear-gradient(135deg, #4f46e5, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.py-6 { padding-top: 5rem; padding-bottom: 5rem; }
+
+.navbar { padding-top: 0.85rem; padding-bottom: 0.85rem; }
+.navbar .nav-link { font-weight: 500; color: #475569; padding: 0.5rem 1rem !important; }
+.navbar .nav-link:hover { color: #4f46e5; }
+.navbar-brand { font-size: 1.5rem; }
+
+.btn-primary { background: linear-gradient(135deg, #4f46e5, #6366f1); border: none; transition: transform .2s, box-shadow .2s; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(79,70,229,0.3); background: linear-gradient(135deg, #4338ca, #5b5fe7); }
+
+.feature-card { background: white; border-radius: 16px; padding: 1.75rem; transition: transform .2s, box-shadow .2s; height: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+.feature-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1rem; }
+
+.school-type-badge { display: inline-block; padding: 0.65rem 1.25rem; background: white; border-radius: 50rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); font-weight: 500; border: 1px solid #e2e8f0; }
+
+.period-btn { padding: 0.45rem 1rem; border-radius: 50rem; border: none; background: transparent; font-weight: 500; transition: all .2s; cursor: pointer; }
+.period-btn.active, .period-btn.btn-primary { background: linear-gradient(135deg, #4f46e5, #6366f1); color: white; }

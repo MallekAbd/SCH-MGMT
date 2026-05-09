@@ -1,0 +1,16 @@
+node_modules/
+.env
+logs/
+public/uploads/*
+!public/uploads/.gitkeep
+.DS_Store
+*.log
+npm-debug.log*
+.vscode/
+.idea/
+coverage/
+.nyc_output/
+*.tgz
+.env.local
+.env.production
+/tmp/

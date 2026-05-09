@@ -1,0 +1,14 @@
+<%- include('../../partials/admin-shell-start') %>
+<h4 class="fw-bold mb-3"><%= training ? 'Modifier' : 'Nouvelle' %> formation</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-4">
+<form action="<%= training ? `/admin/trainings/${training._id}?_method=PUT` : '/admin/trainings' %>" method="POST" class="row g-3">
+<div class="col-md-8"><label class="form-label">Nom *</label><input type="text" name="name" class="form-control" value="<%= training?.name || '' %>" required></div>
+<div class="col-md-4"><label class="form-label">Durée</label><input type="text" name="duration" class="form-control" value="<%= training?.duration || '' %>"></div>
+<div class="col-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="3"><%= training?.description || '' %></textarea></div>
+<div class="col-md-4"><label class="form-label">Frais (DA)</label><input type="number" name="fee" class="form-control" value="<%= training?.fee || 0 %>"></div>
+<div class="col-md-4"><label class="form-label">Max participants</label><input type="number" name="maxParticipants" class="form-control" value="<%= training?.maxParticipants || 30 %>"></div>
+<div class="col-md-4"><label class="form-label">Instructeur</label><select name="instructor" class="form-select"><option value="">—</option><% teachers.forEach(t => { %><option value="<%= t._id %>" <%= training?.instructor?.toString() === t._id.toString() ? 'selected' : '' %>><%= t.user?.firstName %> <%= t.user?.lastName %></option><% }) %></select></div>
+<% if (training) { %><div class="col-12 form-check ms-3"><input type="checkbox" name="isActive" id="isActive" class="form-check-input" <%= training.isActive ? 'checked' : '' %>><label for="isActive">Actif</label></div><% } %>
+<div class="col-12"><a href="/admin/trainings" class="btn btn-light me-2">Annuler</a><button type="submit" class="btn btn-primary px-4">Enregistrer</button></div>
+</form></div></div>
+<%- include('../../partials/admin-shell-end') %>

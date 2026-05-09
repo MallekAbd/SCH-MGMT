@@ -1,0 +1,8 @@
+<% portalType='student'; portalLinks=[{href:'/student/dashboard',match:'/dashboard',icon:'home',label:'Accueil'},{href:'/student/grades',match:'/grades',icon:'star-half-alt',label:'Notes'},{href:'/student/attendance',match:'/attendance',icon:'clipboard-check',label:'Présences'},{href:'/student/schedule',match:'/schedule',icon:'calendar',label:'Emploi'},{href:'/student/library',match:'/library',icon:'book',label:'Biblio'},{href:'/student/invoices',match:'/invoices',icon:'file-invoice',label:'Factures'},{href:'/student/messages',match:'/messages',icon:'envelope',label:'Messages'}]; %>
+<%- include('../../partials/portal-shell-start') %>
+<h4 class="fw-bold mb-3">Mes factures</h4>
+<div class="card border-0 shadow-sm"><div class="card-body p-0"><table class="table mb-0"><thead class="bg-light"><tr><th class="ps-3">N°</th><th>Total</th><th>Solde</th><th>Statut</th><th>Échéance</th></tr></thead><tbody>
+<% if (!invoices || !invoices.length) { %><tr><td colspan="5" class="text-center text-muted py-4">Aucune facture</td></tr><% } %>
+<% (invoices || []).forEach(i => { %><tr><td class="ps-3 small"><%= i.invoiceNumber %></td><td><%= (i.total||0).toLocaleString() %> DA</td><td class="<%= i.balance>0?'text-danger':'text-success' %>"><%= (i.balance||0).toLocaleString() %> DA</td><td><span class="badge bg-<%= {paid:'success',pending:'warning',partial:'info',overdue:'danger'}[i.status] %>-subtle text-<%= {paid:'success',pending:'warning',partial:'info',overdue:'danger'}[i.status] %>"><%= i.status %></span></td><td class="small"><%= i.dueDate ? new Date(i.dueDate).toLocaleDateString('fr-FR') : '—' %></td></tr><% }) %>
+</tbody></table></div></div>
+<%- include('../../partials/portal-shell-end') %>
