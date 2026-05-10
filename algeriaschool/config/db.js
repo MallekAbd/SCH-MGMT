@@ -12,6 +12,9 @@ async function connectDB() {
       const { MongoMemoryServer } = require('mongodb-memory-server');
       mongoServer = await MongoMemoryServer.create({
         binary: { version: process.env.MONGOMS_VERSION || '7.0.14' },
+        instance: {
+          launchTimeout: parseInt(process.env.MONGOMS_LAUNCH_TIMEOUT_MS || '120000', 10),
+        },
       });
       uri = mongoServer.getUri();
       logger.info('Using in-memory MongoDB');
