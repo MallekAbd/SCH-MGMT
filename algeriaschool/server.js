@@ -10,6 +10,16 @@ const PORT = process.env.PORT || 3000;
 async function start() {
   await connectDB();
 
+  if (process.env.USE_MEMORY_DB === 'true') {
+    const User = require('./models/User');
+    const userCount = await User.estimatedDocumentCount();
+    if (userCount === 0) {
+      logger.info('In-memory DB is empty — auto-seeding demo data...');
+      const { runSeed } = require('./seeds/seed');
+      await runSeed();
+    }
+  }
+
   const server = app.listen(PORT, () => {
     logger.info(`\n${'='.repeat(60)}`);
     logger.info(`  AlgeriaSchool Platform running at:`);

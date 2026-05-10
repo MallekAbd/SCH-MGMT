@@ -21,8 +21,7 @@ const Invoice = require('../models/Invoice');
 const Announcement = require('../models/Announcement');
 const Application = require('../models/Application');
 
-async function seed() {
-  await connectDB();
+async function runSeed() {
   console.log('🧹 Cleaning database...');
   await Promise.all([
     Plan.deleteMany({}), School.deleteMany({}), Subscription.deleteMany({}),
@@ -244,12 +243,20 @@ async function seed() {
   console.log('═══════════════════════════════════════════════');
   console.log(`  📊 ${students.length} élèves · ${teachers.length} enseignants · 3 classes`);
   console.log(`  💰 ${invoiceCounter} factures · 2 examens · 2 annonces\n`);
+}
 
+async function seedCli() {
+  await connectDB();
+  await runSeed();
   await disconnectDB();
   process.exit(0);
 }
 
-seed().catch((err) => {
-  console.error('Seed error:', err);
-  process.exit(1);
-});
+module.exports = { runSeed };
+
+if (require.main === module) {
+  seedCli().catch((err) => {
+    console.error('Seed error:', err);
+    process.exit(1);
+  });
+}
