@@ -13,7 +13,7 @@ async function generateInvoicePdf(invoice, school) {
   const doc = new PDFDocument({ margin: 50, size: 'A4' });
   const promise = streamToBuffer(doc);
 
-  doc.fontSize(22).fillColor('#4f46e5').text(school?.name || 'AlgeriaSchool', { align: 'left' });
+  doc.fontSize(22).fillColor('#4f46e5').text(school?.name || 'MadrastekDz', { align: 'left' });
   doc.fontSize(10).fillColor('#64748b').text(school?.address?.city || 'Alger, Algérie', { align: 'left' });
   doc.moveDown(2);
 
@@ -75,7 +75,7 @@ async function generateReportCard(student, averages, overall, school) {
   const doc = new PDFDocument({ margin: 50, size: 'A4' });
   const promise = streamToBuffer(doc);
 
-  doc.fontSize(20).fillColor('#4f46e5').text(school?.name || 'AlgeriaSchool', { align: 'center' });
+  doc.fontSize(20).fillColor('#4f46e5').text(school?.name || 'MadrastekDz', { align: 'center' });
   doc.fontSize(14).fillColor('#1e293b').text("BULLETIN SCOLAIRE", { align: 'center' });
   doc.moveDown(2);
 
@@ -106,7 +106,7 @@ async function generateReportCard(student, averages, overall, school) {
   const overallColor = overall >= 10 ? '#059669' : '#dc2626';
   doc.fillColor(overallColor).text(`${overall.toFixed(2)} / 20`, 400, y, { width: 100, align: 'right' });
 
-  doc.fontSize(9).fillColor('#94a3b8').text('Document généré automatiquement par AlgeriaSchool', 50, 770, { align: 'center', width: 495 });
+  doc.fontSize(9).fillColor('#94a3b8').text('Document généré automatiquement par MadrastekDz', 50, 770, { align: 'center', width: 495 });
 
   doc.end();
   return promise;
@@ -118,7 +118,7 @@ async function generateStudentIdCard(student, school) {
 
   doc.rect(0, 0, 350, 220).fill('#ffffff');
   doc.rect(0, 0, 350, 50).fill('#4f46e5');
-  doc.fontSize(14).fillColor('#ffffff').text(school?.name || 'AlgeriaSchool', 15, 18);
+  doc.fontSize(14).fillColor('#ffffff').text(school?.name || 'MadrastekDz', 15, 18);
   doc.fontSize(9).text('Carte d\'identité scolaire', 15, 35);
 
   doc.rect(15, 65, 80, 100).fill('#e2e8f0').stroke('#cbd5e1');
@@ -154,7 +154,7 @@ async function generateCertificate(user, training, school) {
   doc.fontSize(12).fillColor('#475569').text('pour avoir suivi avec succès la formation', 0, 290, { align: 'center', width: 842 });
   doc.fontSize(20).fillColor('#4f46e5').text(training.name || '', 0, 320, { align: 'center', width: 842 });
 
-  doc.fontSize(10).fillColor('#94a3b8').text(`Délivré par ${school?.name || 'AlgeriaSchool'} le ${new Date().toLocaleDateString('fr-FR')}`, 0, 480, { align: 'center', width: 842 });
+  doc.fontSize(10).fillColor('#94a3b8').text(`Délivré par ${school?.name || 'MadrastekDz'} le ${new Date().toLocaleDateString('fr-FR')}`, 0, 480, { align: 'center', width: 842 });
 
   doc.end();
   return promise;

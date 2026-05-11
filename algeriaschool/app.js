@@ -50,7 +50,7 @@ if (process.env.NODE_ENV !== 'test') {
 // Session
 function buildSessionStore() {
   if (mongoose.connection.readyState === 1) {
-    return MongoStore.create({ mongoUrl: mongoose.connection.client.s.url || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/algeriaschool' });
+    return MongoStore.create({ mongoUrl: mongoose.connection.client.s.url || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/madrastekdz' });
   }
   return undefined;
 }

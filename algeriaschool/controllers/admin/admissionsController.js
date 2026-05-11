@@ -91,7 +91,7 @@ exports.convertToStudent = async (req, res) => {
   if (application.parentEmail) {
     await sendMail({
       to: application.parentEmail,
-      subject: 'Inscription confirmée - AlgeriaSchool',
+      subject: 'Inscription confirmée - MadrastekDz',
       html: `<h2>Inscription confirmée</h2>
              <p>${application.firstName} est maintenant inscrit(e).</p>
              <p>Vos identifiants parent: <strong>${application.parentEmail}</strong> / <strong>${parentPassword}</strong></p>`,

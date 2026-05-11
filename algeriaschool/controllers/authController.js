@@ -155,7 +155,7 @@ exports.postForgotPassword = async (req, res) => {
       const resetUrl = `${process.env.APP_URL}/auth/reset-password/${token}`;
       await sendMail({
         to: user.email,
-        subject: 'Réinitialisation de votre mot de passe - AlgeriaSchool',
+        subject: 'Réinitialisation de votre mot de passe - MadrastekDz',
         html: `<p>Bonjour ${user.firstName},</p>
                <p>Cliquez sur ce lien pour réinitialiser votre mot de passe :</p>
                <a href="${resetUrl}">${resetUrl}</a>
@@ -256,7 +256,7 @@ exports.postRegister = async (req, res) => {
 
     await sendMail({
       to: user.email,
-      subject: 'Bienvenue sur AlgeriaSchool !',
+      subject: 'Bienvenue sur MadrastekDz !',
       html: `<h2>Bienvenue ${user.firstName} !</h2>
              <p>Votre école <strong>${school.name}</strong> a été créée avec succès.</p>
              <p>Vous bénéficiez de 30 jours d'essai gratuit.</p>

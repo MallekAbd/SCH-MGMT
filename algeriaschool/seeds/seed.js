@@ -52,7 +52,7 @@ async function runSeed() {
   console.log('👑 Creating super admin...');
   await User.create({
     firstName: 'Super', lastName: 'Admin',
-    email: 'super@algeriaschool.test', password: 'Admin@123',
+    email: 'super@madrastekdz.test', password: 'Admin@123',
     role: 'super_admin',
   });
 
@@ -235,7 +235,7 @@ async function runSeed() {
   console.log('═══════════════════════════════════════════════');
   console.log('  🔐 IDENTIFIANTS DE DÉMONSTRATION');
   console.log('═══════════════════════════════════════════════');
-  console.log('  Super Admin    : super@algeriaschool.test / Admin@123');
+  console.log('  Super Admin    : super@madrastekdz.test / Admin@123');
   console.log('  School Admin   : admin@demo.test           / Admin@123');
   console.log('  Teacher        : ahmed.benali@demo.test    / Teacher@123');
   console.log('  Student        : yacine.hamidi@demo.test   / Student@123');

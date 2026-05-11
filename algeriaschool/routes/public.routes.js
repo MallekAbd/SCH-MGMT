@@ -6,7 +6,7 @@ const { sendMail } = require('../config/mailer');
 
 router.get('/', async (req, res) => {
   const plans = await Plan.find({ isActive: true }).sort({ 'prices.monthly': 1 });
-  res.render('public/home', { title: 'AlgeriaSchool - Gérez votre école', plans });
+  res.render('public/home', { title: 'MadrastekDz - Gérez votre école', plans });
 });
 
 router.get('/fonctionnalites', (req, res) => {
@@ -25,7 +25,7 @@ router.get('/contact', (req, res) => {
 router.post('/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
   await sendMail({
-    to: 'contact@algeriaschool.com',
+    to: 'contact@madrastekdz.com',
     subject: `Contact: ${subject}`,
     html: `<p>De: ${name} &lt;${email}&gt;</p><p>${message}</p>`,
   });

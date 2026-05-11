@@ -34,7 +34,7 @@ exports.store = async (req, res) => {
   }
   await sendMail({
     to: email,
-    subject: 'Vos identifiants AlgeriaSchool',
+    subject: 'Vos identifiants MadrastekDz',
     html: `<h2>Bienvenue ${firstName} ${lastName}</h2>
            <p>Email: <strong>${email}</strong></p>
            <p>Mot de passe: <strong>${password}</strong></p>

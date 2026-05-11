@@ -82,7 +82,7 @@ describe('Public pages', () => {
   test('homepage loads', async () => {
     const res = await request(app).get('/');
     expect(res.status).toBe(200);
-    expect(res.text).toMatch(/AlgeriaSchool/);
+    expect(res.text).toMatch(/MadrastekDz/);
   });
 
   test('contact page loads', async () => {

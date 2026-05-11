@@ -22,7 +22,7 @@ function getTransporter() {
 }
 
 async function sendMail({ to, subject, html, text }) {
-  const from = process.env.MAIL_FROM || 'AlgeriaSchool <noreply@algeriaschool.com>';
+  const from = process.env.MAIL_FROM || 'MadrastekDz <noreply@madrastekdz.com>';
   const mailOptions = { from, to, subject, html, text };
 
   if (process.env.MAIL_LOG_ONLY === 'true') {

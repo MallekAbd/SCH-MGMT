@@ -22,7 +22,7 @@ async function start() {
 
   const server = app.listen(PORT, () => {
     logger.info(`\n${'='.repeat(60)}`);
-    logger.info(`  AlgeriaSchool Platform running at:`);
+    logger.info(`  MadrastekDz Platform running at:`);
     logger.info(`  → http://localhost:${PORT}`);
     logger.info(`  Mode: ${process.env.NODE_ENV || 'development'}`);
     logger.info(`${'='.repeat(60)}\n`);

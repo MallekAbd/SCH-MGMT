@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "AlgeriaSchool",
+    "name": "MadrastekDz",
     "tagline": "Manage your school with ease"
   },
   "nav": {
@@ -120,7 +120,7 @@
     }
   },
   "pricing": {
-    "title": "AlgeriaSchool Pricing",
+    "title": "MadrastekDz Pricing",
     "subtitle": "Pricing plans for every school",
     "monthly": "Monthly",
     "quarterly": "Quarterly",

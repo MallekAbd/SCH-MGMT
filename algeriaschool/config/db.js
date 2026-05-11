@@ -6,7 +6,7 @@ let mongoServer;
 
 async function connectDB() {
   try {
-    let uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/algeriaschool';
+    let uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/madrastekdz';
 
     if (process.env.USE_MEMORY_DB === 'true') {
       const { MongoMemoryServer } = require('mongodb-memory-server');

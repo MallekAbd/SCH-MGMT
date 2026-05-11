@@ -1,4 +1,4 @@
-# 🎓 AlgeriaSchool — School Management Platform
+# 🎓 MadrastekDz — School Management Platform
 
 A complete, production-ready **multi-tenant school management web platform** designed for private schools in Algeria. Built with Node.js, Express, MongoDB, and EJS.
 
@@ -62,7 +62,7 @@ After running `npm run seed`:
 
 | Role          | Email                          | Password     | URL                  |
 |---------------|--------------------------------|--------------|----------------------|
-| Super Admin   | `super@algeriaschool.test`     | `Admin@123`  | `/super/dashboard`   |
+| Super Admin   | `super@madrastekdz.test`     | `Admin@123`  | `/super/dashboard`   |
 | School Admin  | `admin@demo.test`              | `Admin@123`  | `/admin/dashboard`   |
 | Teacher       | `ahmed.benali@demo.test`       | `Teacher@123`| `/teacher/dashboard` |
 | Student       | `yacine.hamidi@demo.test`      | `Student@123`| `/student/dashboard` |
@@ -73,7 +73,7 @@ Demo seed includes: **1 school, 5 students, 3 teachers, 5 parents, 3 classes, 2 
 ## 📂 Project Structure
 
 ```
-algeriaschool/
+madrastekdz/
 ├── server.js          # Entry point + cron jobs
 ├── app.js             # Express app
 ├── config/            # db, logger, mailer, i18n, multer
@@ -107,7 +107,7 @@ All settings are in `.env`. Key options:
 
 ```env
 USE_MEMORY_DB=true             # Set to false to use a real MongoDB
-MONGODB_URI=mongodb://127.0.0.1:27017/algeriaschool
+MONGODB_URI=mongodb://127.0.0.1:27017/madrastekdz
 JWT_SECRET=<32+ char secret>
 MAIL_LOG_ONLY=true             # No real SMTP needed; emails saved to /tmp/emails/
 DEFAULT_LANG=fr
