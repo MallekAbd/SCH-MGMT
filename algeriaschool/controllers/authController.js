@@ -36,12 +36,14 @@ function setTokenCookies(res, accessToken, refreshToken) {
   });
 }
 
-exports.getLogin = (req, res) => {
+exports.getLogin = async (req, res) => {
   if (req.cookies?.accessToken) {
     try {
       const decoded = jwt.verify(req.cookies.accessToken, process.env.JWT_SECRET);
-      if (decoded) return res.redirect('/dashboard');
+      const user = decoded ? await User.findById(decoded.id).select('_id isActive').lean() : null;
+      if (user && user.isActive) return res.redirect('/dashboard');
     } catch (e) { /* expired or invalid */ }
+    res.clearCookie('accessToken');
   }
   res.render('auth/login', { title: 'Connexion', redirect: req.query.redirect || '/dashboard' });
 };
@@ -97,8 +99,10 @@ function getDashboardPath(role) {
     parent: '/parent/dashboard',
     accountant: '/admin/billing',
   };
-  return map[role] || '/dashboard';
+  return map[role] || '/auth/login';
 }
+
+exports.getDashboardPath = getDashboardPath;
 
 exports.logout = async (req, res) => {
   const refreshToken = req.cookies?.refreshToken;

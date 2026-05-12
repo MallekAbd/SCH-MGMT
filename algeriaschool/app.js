@@ -95,9 +95,10 @@ app.use('/parent', require('./routes/parent/index'));
 app.use('/super', require('./routes/super/index'));
 
 // Dashboard redirect
-app.get('/dashboard', (req, res) => {
-  if (!req.cookies?.accessToken) return res.redirect('/auth/login');
-  res.redirect('/admin/dashboard');
+const { authenticate } = require('./middleware/auth');
+const { getDashboardPath } = require('./controllers/authController');
+app.get('/dashboard', authenticate, (req, res) => {
+  res.redirect(getDashboardPath(req.user.role));
 });
 
 // Error handling

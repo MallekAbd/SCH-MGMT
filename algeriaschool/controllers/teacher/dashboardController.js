@@ -6,7 +6,7 @@ const Exam = require('../../models/Exam');
 const Message = require('../../models/Message');
 const moment = require('moment');
 
-exports.index = async (req, res) => {
+exports.index = async (req, res, next) => {
   try {
     const teacher = await Teacher.findOne({ user: req.user._id, school: req.user.school })
       .populate('classes', 'name level')

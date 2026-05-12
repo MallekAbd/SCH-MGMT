@@ -6,7 +6,7 @@ const Invoice = require('../../models/Invoice');
 const Announcement = require('../../models/Announcement');
 const Message = require('../../models/Message');
 
-exports.index = async (req, res) => {
+exports.index = async (req, res, next) => {
   try {
     const parent = await Parent.findOne({ user: req.user._id, school: req.user.school })
       .populate({
