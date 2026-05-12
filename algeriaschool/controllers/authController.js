@@ -97,8 +97,10 @@ function getDashboardPath(role) {
     parent: '/parent/dashboard',
     accountant: '/admin/billing',
   };
-  return map[role] || '/dashboard';
+  return map[role] || '/auth/login';
 }
+
+exports.getDashboardPath = getDashboardPath;
 
 exports.logout = async (req, res) => {
   const refreshToken = req.cookies?.refreshToken;
