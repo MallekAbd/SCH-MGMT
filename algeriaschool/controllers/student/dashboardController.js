@@ -7,7 +7,7 @@ const Schedule = require('../../models/Schedule');
 const Message = require('../../models/Message');
 const moment = require('moment');
 
-exports.index = async (req, res) => {
+exports.index = async (req, res, next) => {
   try {
     const student = await Student.findOne({ user: req.user._id, school: req.user.school })
       .populate('currentClass', 'name level')
@@ -72,6 +72,10 @@ exports.index = async (req, res) => {
       ? Math.round(((attendanceMap.present || 0) + (attendanceMap.late || 0)) / totalAttendance * 100)
       : null;
 
+    const avgScore = recentGrades.length
+      ? recentGrades.reduce((sum, g) => sum + g.score, 0) / recentGrades.length
+      : 0;
+
     res.render('student/dashboard', {
       title: 'Mon espace',
       student,
@@ -81,6 +85,12 @@ exports.index = async (req, res) => {
       announcements,
       todaySchedule,
       unreadMessages,
+      stats: {
+        avg: avgScore,
+        attendance: attendanceRate ?? 100,
+        upcomingExams: 0,
+        invoices: pendingInvoices,
+      },
       layout: 'student',
     });
   } catch (err) {

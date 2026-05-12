@@ -8,7 +8,7 @@ const Announcement = require('../../models/Announcement');
 const Expense = require('../../models/Expense');
 const moment = require('moment');
 
-exports.index = async (req, res) => {
+exports.index = async (req, res, next) => {
   try {
     const schoolId = req.user.school;
     const today = moment().startOf('day').toDate();
