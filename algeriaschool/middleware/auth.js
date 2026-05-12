@@ -18,6 +18,7 @@ async function authenticate(req, res, next) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id).select('-password -refreshTokens').populate('customRole');
     if (!user || !user.isActive) {
+      res.clearCookie('accessToken');
       return res.redirect('/auth/login');
     }
     req.user = user;
